@@ -1,0 +1,100 @@
+{
+  "name": "fevmi",
+  "version": "0.9.0",
+  "description": "",
+  "type": "module",
+  "module": "_build/index.js",
+  "main": "_build/index.js",
+  "types": "_build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./_build/index.d.ts",
+      "import": "./_build/index.js"
+    },
+    "./elements": {
+      "types": "./_build/elements.d.ts",
+      "import": "./_build/elements.js"
+    },
+    "./spectrum": {
+      "types": "./_build/wrapped-spectrum/index.d.ts",
+      "import": "./_build/wrapped-spectrum/index.js"
+    },
+    "./react": {
+      "types": "./_build/wrapped-react/index.d.ts",
+      "import": "./_build/wrapped-react/index.js"
+    },
+    "./*.js": {
+      "types": "./_build/index.d.ts",
+      "import": "./_build/*.js"
+    },
+    "./utils": {
+      "types": "./_build/utils/utils.d.ts",
+      "import": "./_build/utils/utils.js"
+    },
+    "./persistence": {
+      "types": "./_build/out-persistence/index.d.ts",
+      "import": "./_build/out-persistence/index.js"
+    },
+    "./default-persistence-outlet": {
+      "types": "./_build/_integration/default-persistence-outlet.d.ts",
+      "import": "./_build/_integration/default-persistence-outlet.js"
+    },
+    "./index.css": {
+      "import": "./src/index.css"
+    },
+    "./lit-imports": {
+      "types": "./_build/_shared/lit-imports.d.ts",
+      "import": "./_build/_shared/lit-imports.js"
+    },
+    "./fe3": {
+      "types": "./_build/reexport-fe3.d.ts",
+      "import": "./_build/reexport-fe3.js"
+    }
+  },
+  "files": [
+    "_build/**/*",
+    "src/**/*",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "build:ts": "bun tsc --build --pretty",
+    "dev:link-deps": "bun link fe3 festrand",
+    "dev:unlink-deps": "bun unlink fe3 festrand",
+    "dev:publish-link": "bun link",
+    "dev:publish-unlink": "bun unlink"
+  },
+  "dependencies": {
+    "@lit-labs/preact-signals": "latest",
+    "@lit-labs/virtualizer": "latest",
+    "@lit-labs/vue-utils": "latest",
+    "@lit/context": "latest",
+    "@lit/react": "latest",
+    "@lit/reactive-element": "latest",
+    "@spectrum-web-components/icons-workflow": "latest",
+    "@spectrum-web-components/textfield": "latest",
+    "@spectrum-web-components/theme": "latest",
+    "fe3": "link:fe3",
+    "festrand": "link:festrand",
+    "lit": "latest",
+    "nanoid": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "timur.xyz",
+  "publishConfig": {
+    "access": "public"
+  },
+  "resolutions": {
+    "react": "latest",
+    "react-dom": "latest",
+    "@types/react": "latest"
+  }
+}

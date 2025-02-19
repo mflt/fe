@@ -1,0 +1,36 @@
+{
+  "name": "@depjam.kits/xstd.brave",
+  "version": "1.2502.1",
+  "scripts": {
+    "initkit": "yarn dlx jsr add @std/toml",
+    "updkit": ""
+  },
+  "dependencies": {
+    "@std/toml": "npm:@jsr/std__toml@^1.0.2",
+    "effect": "^3",
+    "fast-safe-stringify": "^2",
+    "mergician": "latest",
+    "mustache": "latest",
+    "nanoid": "^5",
+    "nanostores": "latest"
+  },
+  "devDependencies": {
+    "@clack/prompts": "latest",
+    "@types/bun": "latest",
+    "@types/glob": "latest",
+    "@types/mustache": "latest",
+    "@types/node": "latest",
+    "browserslist": "^4",
+    "bun": "latest",
+    "bun-plugin-dts": "latest",
+    "bun-types": "latest",
+    "jsr": "latest",
+    "picocolors": "latest",
+    "rimraf": "latest",
+    "ts-standard": "latest",
+    "tslib": "latest",
+    "type-fest": "latest",
+    "typescript": "beta",
+    "typescript-plugin-toml": "latest"
+  }
+}

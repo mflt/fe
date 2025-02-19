@@ -1,0 +1,55 @@
+{
+  "name": "fe3",
+  "version": "0.9.0",
+  "description": "",
+  "type": "module",
+  "module": "_build/index.js",
+  "main": "_build/index.js",
+  "types": "_build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./_build/index.d.ts",
+      "import": "./_build/index.js",
+      "node": "./_build/index.js",
+      "default": "./_build/index.js"
+    },
+    "./utils": {
+      "types": "./_build/utils/index.d.ts",
+      "import": "./_build/utils/index.js"
+    },
+    "./triplet": {
+      "types": "./_build/triplet/index.d.ts",
+      "import": "./_build/triplet/index.js"
+    },
+    "./iterableKeyed": {
+      "types": "./_build/iterableKeyed/ponyfillIterableonKeyedObject.d.ts",
+      "import": "./_build/iterableKeyed/ponyfillIterableonKeyedObject.js"
+    },
+    "./beat": {
+      "types": "./_build/beat/beat.i-f.d.ts",
+      "import": "./_build/beat/beat.i-f.js"
+    }
+  },
+  "files": [
+    "_build/**/*",
+    "src/**/*",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "build:ts": "bun tsc --build --pretty",
+    "dev:publish-link": "bun link",
+    "dev:publish-unlink": "bun unlink"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "timur.xyz",
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "./tsconfig.common.json",
+  ],
+  "compilerOptions": {
+    "baseUrl": "./", // unambiguous declaration for resolution overriding node logic and complementing the paths declarations
+    "types": [
+      "bun-types" // add Bun global, might not work if added in the shared tsconfig
+    ],
+    "paths": {
+    }
+  },
+  "include": [],
+  // "references": [
+  //   { "path": "code/packages/xox" }
+  // ]
+}

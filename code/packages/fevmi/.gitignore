@@ -1,0 +1,8 @@
+/node_modules/
+/_build/
+.yarn/
+yarn.lock
+.DS_Store
+tsconfig.tsbuildinfo
+.yarnrc.yml
+bun.lockb

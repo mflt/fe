@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./_build",
+    "module": "esnext",
+    "target": "esnext",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "moduleResolution": "bundler",
+    "moduleDetection": "force", // * suggested by bun
+    "declaration": true,
+    "experimentalDecorators": true, // * for lit
+    "strict": true, // * explicitly set in the init-ed version by tsc itself
+    "forceConsistentCasingInFileNames": true, // * explicitly set in the init-ed version by tsc itself
+    "skipLibCheck": true, // * explicitly set in the init-ed version by tsc itself
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.css"
+  ],
+}

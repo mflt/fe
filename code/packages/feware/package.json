@@ -1,0 +1,54 @@
+{
+  "name": "@mflt/feware",
+  "version": "0.8.13",
+  "description": "",
+  "//": "",
+  "#todos": [
+    ""
+  ],
+  "type": "module",
+  "module": "_/index.js",
+  "main": "_/index.js",
+  "types": "_/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./_/dts/index.d.ts",
+      "import": "./_/esm/index.js",
+      "node": "./_/esm/index.js",
+      "default": "./_/esm/index.js"
+    },
+    "./blocks-sequencer": {
+      "types": "./_/dts/blocks-sequencer/blocks-sequencer.d.ts",
+      "import": "./_/esm/blocks-sequencer/blocks-sequencer.js"
+    }
+  },
+  "files": [
+    "_/**/*",
+    "mod.libs/**/*",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "build:ts": "bun tsc --build --pretty",
+    "publish:npmjs": "bun publish",
+    "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json ../../../LICENSE  _/",
+    "npmjs:login": "bunx npm login",
+    "dev:publish-link": "bun link",
+    "dev:publish-unlink": "bun unlink"
+  },
+  "dependencies": {
+    "@mflt/_fe": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "timur.xyz",
+  "publishConfig": {
+    "access": "public"
+  }
+}

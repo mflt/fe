@@ -1,0 +1,25 @@
+
+
+fe-slices-scroller {
+    display: contents;
+}
+
+fe-slices-scroller > fe-sequencer-lo_ {
+    /*display: block; set by the sequencer/virtualizer code */
+    flex: 1;
+    width: 100%;
+    scrollbar-color: auto;
+    scrollbar-width: thin;
+    /*background-color: green;*/
+}
+
+fe-slice-in-scroller {
+    display: block;
+}
+.fe-slice-in-scroller {  /* this actually hits the well, not the above */
+    --spectrum-alias-border-radius-regular: 20px;
+}
+
+.fe-mounted-c-class {
+    display: contents;
+}

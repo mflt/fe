@@ -1,0 +1,61 @@
+{
+  "name": "@mflt/_fe",
+  "version": "0.8.14",
+  "description": "",
+  "//": "",
+  "#todos": [
+    ""
+  ],
+  "type": "module",
+  "module": "_/index.js",
+  "main": "_/index.js",
+  "types": "_/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./_/dts/index.d.ts",
+      "import": "./_/esm/index.js",
+      "node": "./_/esm/index.js",
+      "default": "./_/esm/index.js"
+    },
+    "./probes": {
+      "types": "./_/dts/probes/probes.d.ts",
+      "import": "./_/esm/probes/probes.js"
+    },
+    "./promises": {
+      "types": "./_/dts/promises/promises.d.ts",
+      "import": "./_/esm/promises/promises.js"
+    },
+    "./collections": {
+      "types": "./_/dts/collections/index.d.ts",
+      "import": "./_/esm/collections/index.js"
+    },
+    "./helpers/*": "./mod.libs/helpers/*.ts",
+    "./core-types/*": "./mod.libs/core-types/*.d.ts"
+  },
+  "files": [
+    "_/**/*",
+    "mod.libs/**/*",
+    "tsconfig.json"
+  ],
+  "scripts": {
+    "build:ts": "bun tsc --build --pretty",
+    "publish:npmjs": "bun publish",
+    "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json ../../../LICENSE  _/",
+    "npmjs:login": "bunx npm login",
+    "dev:publish-link": "bun link",
+    "dev:publish-unlink": "bun unlink"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "timur.xyz",
+  "publishConfig": {
+    "access": "public"
+  }
+}

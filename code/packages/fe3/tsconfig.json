@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./_build",
+    "module": "esnext",
+    "target": "esnext",
+    "lib": [
+      "ESNext",
+      // "DOM",
+      // "DOM.Iterable"
+    ],
+    "moduleResolution": "bundler",
+    "moduleDetection": "force", // * suggested by bun
+    "declaration": true,
+    "experimentalDecorators": true, // * for lit
+    "strict": true, // * explicitly set in the init-ed version by tsc itself
+    "forceConsistentCasingInFileNames": true, // * explicitly set in the init-ed version by tsc itself
+    "skipLibCheck": true, // * explicitly set in the init-ed version by tsc itself
+  },
+  "include": [
+    "src/**/*.ts"
+, "../fe-kit/code/packages/core-types/helper.types.ts", "../fe-kit/code/packages/collections/collection.ts", "../fe-kit/code/packages/core-types/types.ts", "../fe-kit/code/packages/promises/promise.ts", "../fe-kit/code/packages/probes/probes.ts", "../fe-kit/code/packages/iterableKeyed/ponyfillIterableonKeyedObject.ts", "../fe-kit/code/packages/helpers/helpers.ts"  ],
+}

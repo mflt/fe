@@ -1,0 +1,21 @@
+{
+  "name": "@mflt/fe",
+  "workspaces": [
+    "./code/packages/*",
+    "./code/shared.kits/**/*"
+  ],
+  "scripts": {
+    "repo:init": "yarn workspace @depjam.kits/xstd.brave initkit",
+    "wrong": "export NPM_TOKEN=$(cat ~/.npmrc | grep -o '_authToken=.*' | sed 's/_authToken=//g')",
+    "std": "ts-standard"
+  },
+  "browserslist": [
+    "defaults and fully supports es6-module",
+    "maintained node versions"
+  ],
+  "trustedDependencies": [],
+  "packageManager": "yarn@4.5.3",
+  "engines": {
+    "node": ">= 23.0.0"
+  }
+}

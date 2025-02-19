@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.common.json",
+  "compilerOptions": {
+    "types": [],
+    "rootDir": "${configDir}/mod.libs",
+    "outDir": "${configDir}/_/esm",
+    "declarationDir": "${configDir}/_/dts",
+    "tsBuildInfoFile": "${configDir}/_/mod.tsbuildinfo",
+    "stripInternal": true,
+  },
+  "include": [
+    "${configDir}/mod.libs/**/*"
+  ],
+}
