@@ -1,6 +1,6 @@
 {
   "name": "@mflt/_fe",
-  "version": "0.8.14",
+  "version": "0.8.15",
   "description": "",
   "//": "",
   "#todos": [
@@ -30,18 +30,22 @@
       "types": "./_/dts/collections/index.d.ts",
       "import": "./_/esm/collections/index.js"
     },
-    "./helpers/*": "./mod.libs/helpers/*.ts",
-    "./core-types/*": "./mod.libs/core-types/*.d.ts"
+    "./helpers": {
+      "types": "./_/dts/helpers/index.d.ts",
+      "import": "./_/esm/helpers/index.js"
+    },
+    "./core-types/*": "./libs/core-types/*.ts"
   },
   "files": [
     "_/**/*",
-    "mod.libs/**/*",
-    "tsconfig.json"
+    "libs/**/*",
+    "tsconfig.json",
+    "LICENSE"
   ],
   "scripts": {
     "build:ts": "bun tsc --build --pretty",
     "publish:npmjs": "bun publish",
-    "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json ../../../LICENSE  _/",
+    "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json _/; cp ../../../LICENSE ./",
     "npmjs:login": "bunx npm login",
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"

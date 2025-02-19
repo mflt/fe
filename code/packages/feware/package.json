@@ -1,6 +1,6 @@
 {
   "name": "@mflt/feware",
-  "version": "0.8.13",
+  "version": "0.8.15",
   "description": "",
   "//": "",
   "#todos": [
@@ -25,13 +25,13 @@
   },
   "files": [
     "_/**/*",
-    "mod.libs/**/*",
+    "libs/**/*",
     "tsconfig.json"
   ],
   "scripts": {
     "build:ts": "bun tsc --build --pretty",
     "publish:npmjs": "bun publish",
-    "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json ../../../LICENSE  _/",
+    "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json _/; cp ../../../LICENSE ./",
     "npmjs:login": "bunx npm login",
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
