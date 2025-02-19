@@ -29,4 +29,3 @@ export function _defineProperty <
 {
   Object.defineProperty(obj, prop, val);
 }
-
