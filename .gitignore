@@ -22,7 +22,7 @@ node_modules
 
 #ide
 .idea
-.zed
+# .zed
 # .vscode
 
 # dev/build outputs
