@@ -1,8 +1,11 @@
 {
   "name": "@mflt/feware",
-  "version": "0.8.15",
+  "version": "0.8.20",
   "description": "",
   "//": "",
+  "#recent-changes": [
+    "renamed job-blocks-sequencer"
+  ],
   "#todos": [
     ""
   ],
@@ -18,9 +21,9 @@
       "node": "./_/esm/index.js",
       "default": "./_/esm/index.js"
     },
-    "./blocks-sequencer": {
-      "types": "./_/dts/blocks-sequencer/blocks-sequencer.d.ts",
-      "import": "./_/esm/blocks-sequencer/blocks-sequencer.js"
+    "./job-blocks-sequencer": {
+      "types": "./_/dts/job-blocks-sequencer/job-blocks-sequencer.d.ts",
+      "import": "./_/esm/job-blocks-sequencer/job-blocks-sequencer.js"
     }
   },
   "files": [

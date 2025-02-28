@@ -1,6 +1,7 @@
-import { mergician, type MergicianOptions } from 'mergician'
+import { mergician, type MergicianOptions } from 'mergician'  
+// * Could have used jsr/std... but that would've made a comfort obstacle for nodejsers 
 import type {
-  _Branded, _WithAssertedBrand, _FeMilliseconds,
+  FeTEmptyObject, _Branded, _WithAssertedBrand, _FeMilliseconds,
 } from '@mflt/_fe'
 import {
   FeExecSignaling, FeReadinessSignaling,
@@ -9,49 +10,49 @@ import {
 } from '@mflt/_fe'
 
 
-export class FeCatchComm {
-  framingMessage: string | undefined
+export class FeCat4 { // catch communication
+  throwwith: string | undefined
 }
 
-export type FeBsqrBlocksKeysT = string
+export type FeJbsqBlocksKeysT = string
 
 const __waitingforRequestedBlocktoCompleteDefaultTimeout = 5000
 
-export type FeBsqrToExecasFunctions <
-  BlocksKeys extends FeBsqrBlocksKeysT,
-  PassthruCtl extends {}, // the config/options blocks pass to each other @TODO prototype
+export type FeJbsqToExecasFunctions <
+  BlocksKeys extends FeJbsqBlocksKeysT,
+  JobTerms extends FeTEmptyObject, // the shared config/options/env blocks pass to each other @TODO prototype
 > = Record<
   BlocksKeys,
-  undefined | ((passthruCtl: PassthruCtl) => Promise<PassthruCtl>)
+  undefined | ((jobTerms: JobTerms) => Promise<JobTerms>)
 >
 
-export type FeBsqrExecSignals <
-  BlocksKeys extends FeBsqrBlocksKeysT,
-  PassthruCtl extends {},
+export type FeJbsqExecSignals <
+  BlocksKeys extends FeJbsqBlocksKeysT,
+  JobTerms extends FeTEmptyObject,
 > = Record<
   BlocksKeys,
-  FeExecSignaling<PassthruCtl, PassthruCtl>
+  FeExecSignaling<JobTerms, JobTerms>
 >
 
-export interface IFeBsqrBaseUtilities {
-  catchComm: FeCatchComm
+export interface IFeJbsqBaseUtilities {
+  c4: FeCat4
 }
 
-export type FeBsqrBaseCtxSignals <
-  Utilities extends IFeBsqrBaseUtilities = IFeBsqrBaseUtilities
+export type FeJbsqBaseCtxSignals <
+  Utilities extends IFeJbsqBaseUtilities = IFeJbsqBaseUtilities
 > = {
   sequencerReady: FeReadinessSignaling<Utilities>
 }
 
-export type FeBsqrWaitingforRequestedBlocktoCompleteTimeouts <
-  BlocksKeys extends FeBsqrBlocksKeysT
+export type FeJbsqWaitingforRequestedBlocktoCompleteTimeouts <
+  BlocksKeys extends FeJbsqBlocksKeysT
 > = Record<
   BlocksKeys,  // @TODO partial?
   number | _FeMilliseconds  // @TODO test
 >
 
-export type FeBsqrAddtoSkipped  <
-  BlocksKeys extends FeBsqrBlocksKeysT
+export type FeJbsqAddtoSkipped  <
+  BlocksKeys extends FeJbsqBlocksKeysT
 > =
   | Array<BlocksKeys>
   | {
@@ -59,69 +60,69 @@ export type FeBsqrAddtoSkipped  <
     builtinBlocks: Array<BlocksKeys>
   }
 
-export interface IFeBsqrExecMods <
-  BlocksKeys extends FeBsqrBlocksKeysT,
-  PassthruCtl extends {},
+export interface IFeJbsqExecMods <
+  BlocksKeys extends FeJbsqBlocksKeysT,
+  JobTerms extends FeTEmptyObject,
 > {
-  addtoSkipped?: FeBsqrAddtoSkipped<BlocksKeys>
+  addtoSkipped?: FeJbsqAddtoSkipped<BlocksKeys>
   // blockstoSkip?: BlocksKeys[] // @TODO typing
   // builtinBlockstoSkip?: Array<BlocksKeys> // @TODO typing
-  blockstoExecasFunctions?: Partial<FeBsqrToExecasFunctions<BlocksKeys, PassthruCtl>>
+  blockstoExecasFunctions?: Partial<FeJbsqToExecasFunctions<BlocksKeys, JobTerms>>
 }
 
-export abstract class IFeBlocksSequencerCtx <
-  BlocksKeys extends FeBsqrBlocksKeysT,
-  PassthruCtl extends {},
+export abstract class IFeJobBlocksSequencerAsyncCtx <
+  BlocksKeys extends FeJbsqBlocksKeysT,
+  JobTerms extends FeTEmptyObject,
   // * @TODO but basically it's a matter of the implementation, which will pass it arround between blocks
-  Utilities extends IFeBsqrBaseUtilities = IFeBsqrBaseUtilities
-> /* implements CastArrayTtoSetTinRecord<IFeBsqrExecMods<BlocksKeys, PassthruCtl>> */ {
+  Utilities extends IFeJbsqBaseUtilities = IFeJbsqBaseUtilities
+> /* implements CastArrayTtoSetTinRecord<IFeJbsqExecMods<BlocksKeys, JobTerms>> */ {
   blockstoSkip!: Set<BlocksKeys>
   builtinBlockstoSkip!: Set<BlocksKeys>
-  blockstoExecasFunctions!: Partial<FeBsqrToExecasFunctions<BlocksKeys, PassthruCtl>>
-  protected builtinBlocksFunctions?: Partial<FeBsqrToExecasFunctions<BlocksKeys, PassthruCtl>>
+  blockstoExecasFunctions!: Partial<FeJbsqToExecasFunctions<BlocksKeys, JobTerms>>
+  protected builtinBlocksFunctions?: Partial<FeJbsqToExecasFunctions<BlocksKeys, JobTerms>>
   sequencerName?: string
-  execSignals!: FeBsqrExecSignals<BlocksKeys, PassthruCtl>
-  ctxSignals!: FeBsqrBaseCtxSignals<Utilities>
+  execSignals!: FeJbsqExecSignals<BlocksKeys, JobTerms>
+  ctxSignals!: FeJbsqBaseCtxSignals<Utilities>
   utilities!: Utilities
-  getPassthruCtl!: () => PassthruCtl // all blocks are expected to process this shared context
+  getJobTerms!: () => JobTerms // all blocks are expected to process this shared, passed thru context/options/env
   waitingforRequestedBlocktoCompleteTimeout?:
-    FeBsqrWaitingforRequestedBlocktoCompleteTimeouts<BlocksKeys>
+    FeJbsqWaitingforRequestedBlocktoCompleteTimeouts<BlocksKeys>
 }
 // & SequencerExtensionProps
 
-export type FeBsqrCastCtxSlotstoInitiatorType < // @TODO
-  BlocksKeys extends FeBsqrBlocksKeysT,
-  PassthruCtl extends {},
+export type FeJbsqCastCtxSlotstoInitiatorType < // @TODO
+  BlocksKeys extends FeJbsqBlocksKeysT,
+  JobTerms extends FeTEmptyObject,
 > =
-  & IFeBsqrExecMods<BlocksKeys, PassthruCtl>  // no actual casting needed here
+  & IFeJbsqExecMods<BlocksKeys, JobTerms>  // no actual casting needed here
   & {
     // helper initiator slots
-    passthruCtlRef?: PassthruCtl
+    jobTermsRef?: JobTerms
   }
 
-export class FeBlocksSequencerCtx <
-  BlocksKeys extends FeBsqrBlocksKeysT,
-  PassthruCtl extends {},
-  Utilities extends IFeBsqrBaseUtilities = IFeBsqrBaseUtilities
-> extends IFeBlocksSequencerCtx<BlocksKeys, PassthruCtl, Utilities> {
+export class FeJobBlocksSequencerAsyncCtx <
+  BlocksKeys extends FeJbsqBlocksKeysT,
+  JobTerms extends FeTEmptyObject,
+  Utilities extends IFeJbsqBaseUtilities = IFeJbsqBaseUtilities
+> extends IFeJobBlocksSequencerAsyncCtx<BlocksKeys, JobTerms, Utilities> {
 
   public constructor(
     public sequencerName: string,
     protected blocksKeysDonor: Record<BlocksKeys, {}>, // must bring all the blocks keys (functional or skipped) and no others
     initiator?: Partial<
       & Pick<
-        IFeBlocksSequencerCtx<BlocksKeys, PassthruCtl, Utilities>,
+        IFeJobBlocksSequencerAsyncCtx<BlocksKeys, JobTerms, Utilities>,
         // 'blockstoExecasFunctions'
-        // / see in the FeBsqrCastCtxSlotstoInitiatorType below
+        // / see in the FeJbsqCastCtxSlotstoInitiatorType below
         'blockstoSkip' | 'builtinBlockstoSkip' |  // these come from level1, while addtoSkipped comes from mod
         'utilities'|'waitingforRequestedBlocktoCompleteTimeout'
       >
-      & FeBsqrCastCtxSlotstoInitiatorType<BlocksKeys, PassthruCtl>  // ie mod
+      & FeJbsqCastCtxSlotstoInitiatorType<BlocksKeys, JobTerms>  // ie mod
     >
   ) {
     super()
     if (_feIsNotanEmptyObject(initiator)) {
-      const { blockstoSkip, builtinBlockstoSkip, passthruCtlRef, addtoSkipped, ...trimmedInitiator } = initiator
+      const { blockstoSkip, builtinBlockstoSkip, jobTermsRef, addtoSkipped, ...trimmedInitiator } = initiator
       Object.assign(this, mergician(this, trimmedInitiator))
     }
     this.utilities ??= {} as typeof this.utilities
@@ -141,42 +142,42 @@ export class FeBlocksSequencerCtx <
     this.builtinBlockstoSkip = new Set<BlocksKeys>([
       ...(initiator?.builtinBlockstoSkip || []),
       ...(_feIsObject(initiator?.addtoSkipped)
-        ? (initiator.addtoSkipped as Exclude<FeBsqrAddtoSkipped<BlocksKeys>, Array<unknown>>).builtinBlocks || []
+        ? (initiator.addtoSkipped as Exclude<FeJbsqAddtoSkipped<BlocksKeys>, Array<unknown>>).builtinBlocks || []
         : []
       )
     ] as Array<BlocksKeys>)
-    if (!_feIsFunction(this.getPassthruCtl)) {
-      if (_feIsObject(initiator?.passthruCtlRef)) {
-        this.getPassthruCtl = () => initiator?.passthruCtlRef!
+    if (!_feIsFunction(this.getJobTerms)) {
+      if (_feIsObject(initiator?.jobTermsRef)) {
+        this.getJobTerms = () => initiator?.jobTermsRef!
       } else {
         throw new Error(
-          `Neither getPassthruCtl or passthruCtlRef for ${this.sequencerName || '<unnamed seqiencer>'} were specified`
+          `Neither getJobTerms or jobTermsRef for ${this.sequencerName || '<unnamed seqiencer>'} were specified`
         )
       }
     } else {
-      _feAssertIsSyncFunction<PassthruCtl>(
-        this.getPassthruCtl,
-        { message: `getPassthruCtl in ${this.sequencerName || '<unnamed seqiencer>'} is not a function` }
+      _feAssertIsSyncFunction<JobTerms>(
+        this.getJobTerms,
+        { message: `getJobTerms in ${this.sequencerName || '<unnamed seqiencer>'} is not a function` }
       )
     }
     // this.utilities.catchComm ??= @TODO
     // test @TODO
   }
 
-  assigntoPassthruCtl (
-    toMerge: Partial<PassthruCtl>,
+  assigntoJobTerms (
+    toMerge: Partial<JobTerms>,
     mergicianOptions?: MergicianOptions
-  ): PassthruCtl {
-    const passthruCtlRef = this.getPassthruCtl()
+  ): JobTerms {
+    const jobTermsRef = this.getJobTerms()
     if (_feIsNotanEmptyObject(toMerge)) {
-      return Object.assign(passthruCtlRef, mergician(
+      return Object.assign(jobTermsRef, mergician(
         mergicianOptions || {}
       )(
-        passthruCtlRef,
+        jobTermsRef,
         toMerge
-      )) as PassthruCtl // returns the target aka this.getPassthruCtl()
+      )) as JobTerms // returns the target aka this.getJobTerms()
     }
-    return passthruCtlRef
+    return jobTermsRef
   }
 
   engageExecSignals () {
@@ -216,9 +217,9 @@ export class FeBlocksSequencerCtx <
           message: `${this.sequencerName} is handling ${blockId} in the specified ${_blockFn ? '' : 'built-in'} function call`,
           execSignaling: 'RequestSkipped'
         })
-        const _passthruCtl = await (_blockFn || _builtinFn!)(this.getPassthruCtl())
-        signaling.done(_passthruCtl)  // @TODO if failed
-        return _passthruCtl
+        const _jobTermsRef = await (_blockFn || _builtinFn!)(this.getJobTerms())
+        signaling.done(_jobTermsRef)  // @TODO if failed
+        return _jobTermsRef
       } else {
         const _timeoutHandler = _feIsAsyncFunction(waitingforRequestedBlocktoCompleteHandler)
           ?
@@ -230,12 +231,12 @@ export class FeBlocksSequencerCtx <
               throw new Error(`${this.sequencerName} got ${blockId} as to be executed as a built-in function but got a non-function value`) // @TODO
             } // @TODO will it throw here?
           )
-        signaling.request(this.getPassthruCtl())
-        const _passthruCtl = await Promise.all([
+        signaling.request(this.getJobTerms())
+        const _jobTermsRef = await Promise.all([
           signaling.tillDone,
           _timeoutHandler
-        ]) as Awaited<PassthruCtl>
-        return _passthruCtl
+        ]) as Awaited<JobTerms>
+        return _jobTermsRef
       }
     } else {
       signaling.skip({
@@ -243,7 +244,7 @@ export class FeBlocksSequencerCtx <
         execSignaling: 'RequestSkipped'
       })
       signaling.skipped()
-      return this.getPassthruCtl()
+      return this.getJobTerms()
     }
   }
 }
