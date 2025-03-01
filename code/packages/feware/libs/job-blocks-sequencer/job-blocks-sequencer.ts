@@ -60,7 +60,7 @@ export type FeJbsqAddtoSkipped  <
     builtinBlocks: Array<BlocksKeys>
   }
 
-export interface IFeJbsqExecMods <
+export interface IFeJbsqInitiatorExecMods <
   BlocksKeys extends FeJbsqBlocksKeysT,
   JobTerms extends FeTEmptyObject,
 > {
@@ -94,7 +94,7 @@ export type FeJbsqCastCtxSlotstoInitiatorType < // @TODO
   BlocksKeys extends FeJbsqBlocksKeysT,
   JobTerms extends FeTEmptyObject,
 > =
-  & IFeJbsqExecMods<BlocksKeys, JobTerms>  // no actual casting needed here
+  & IFeJbsqInitiatorExecMods<BlocksKeys, JobTerms>  // no actual casting needed here
   & {
     // helper initiator slots
     jobTermsRef?: JobTerms
