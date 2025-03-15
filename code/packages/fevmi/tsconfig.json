@@ -6,8 +6,7 @@
     "target": "esnext",
     "lib": [
       "ESNext",
-      "DOM",
-      "DOM.Iterable"
+      "DOM"
     ],
     "moduleResolution": "bundler",
     "moduleDetection": "force", // * suggested by bun

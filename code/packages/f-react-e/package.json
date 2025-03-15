@@ -1,8 +1,9 @@
 {
-  "name": "@mflt/_fe",
-  "version": "0.8.15",
+  "name": "@mflt/f-react-e",
+  "version": "0.2503.1",
   "description": "",
   "//": "",
+  "#recent-changes": [],
   "#todos": [
     ""
   ],
@@ -18,23 +19,10 @@
       "node": "./_/esm/index.js",
       "default": "./_/esm/index.js"
     },
-    "./probes": {
-      "types": "./_/dts/probes/probes.d.ts",
-      "import": "./_/esm/probes/probes.js"
-    },
-    "./promises": {
-      "types": "./_/dts/promises/promises.d.ts",
-      "import": "./_/esm/promises/promises.js"
-    },
-    "./collections": {
-      "types": "./_/dts/collections/index.d.ts",
-      "import": "./_/esm/collections/index.js"
-    },
-    "./helpers": {
-      "types": "./_/dts/helpers/index.d.ts",
-      "import": "./_/esm/helpers/index.js"
-    },
-    "./core-types/*": "./libs/core-types/*.ts"
+    "./job-blocks-sequencer": {
+      "types": "./_/dts/observers/usePeakHeightObserver.d.ts",
+      "import": "./_/esm/observers/usePeakHeightObserver.js"
+    }
   },
   "files": [
     "_/**/*",
@@ -49,9 +37,19 @@
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
   },
+  "dependencies": {
+    "@mflt/_fe": "latest",
+    "tamagui": "latest"
+  },
   "devDependencies": {
     "@types/node": "latest",
+    "react": "^18.2.0 || ^19.0.0",
     "typescript": "beta"
+  },
+  "peerDependencies": {
+    "@mflt/_fe": "*",
+    "react": "*",
+    "tamagui": "*"
   },
   "repository": {
     "type": "git",
