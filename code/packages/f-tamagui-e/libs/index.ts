@@ -1,1 +1,1 @@
-export * from './job-blocks-sequencer/job-blocks-sequencer.js'
+export * from './components/BlocksSlider.js'

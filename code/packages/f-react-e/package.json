@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-react-e",
-  "version": "0.2503.1",
+  "version": "0.2503.5",
   "description": "",
   "//": "",
   "#recent-changes": [],
@@ -19,9 +19,13 @@
       "node": "./_/esm/index.js",
       "default": "./_/esm/index.js"
     },
-    "./job-blocks-sequencer": {
+    "./usePeakHeightObserver": {
       "types": "./_/dts/observers/usePeakHeightObserver.d.ts",
       "import": "./_/esm/observers/usePeakHeightObserver.js"
+    },
+    "./ShoelaceCarousel": {
+      "types": "./_/dts/components/ShoelaceCarousel.d.ts",
+      "import": "./_/esm/components/ShoelaceCarousel.js"
     }
   },
   "files": [
@@ -38,18 +42,18 @@
     "dev:publish-unlink": "bun unlink"
   },
   "dependencies": {
-    "@mflt/_fe": "latest",
-    "tamagui": "latest"
+    "@mflt/_fe": "latest"
   },
   "devDependencies": {
+    "@shoelace-style/shoelace": "latest",
     "@types/node": "latest",
     "react": "^18.2.0 || ^19.0.0",
     "typescript": "beta"
   },
   "peerDependencies": {
     "@mflt/_fe": "*",
-    "react": "*",
-    "tamagui": "*"
+    "@shoelace-style/shoelace": "*",
+    "react": "*"
   },
   "repository": {
     "type": "git",

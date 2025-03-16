@@ -61,6 +61,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ctrl/tinycolor@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@ctrl/tinycolor@npm:4.1.0"
+  checksum: 10/e64569399139ef0abd2eb0ec9fb7267dfd7820f7ad7d4567a63e5fc35e5cfdcb8ecdb3bad65cb9244b47ba6c77bc51085826c00e981acf263a3221dc89343adc
+  languageName: node
+  linkType: hard
+
 "@depjam.kits/xstd.brave@workspace:code/shared.kits/xstd":
   version: 0.0.0-use.local
   resolution: "@depjam.kits/xstd.brave@workspace:code/shared.kits/xstd"
@@ -143,7 +150,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^1.0.0":
+"@floating-ui/dom@npm:^1.0.0, @floating-ui/dom@npm:^1.6.12":
   version: 1.6.13
   resolution: "@floating-ui/dom@npm:1.6.13"
   dependencies:
@@ -306,7 +313,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit/react@npm:latest":
+"@lit/react@npm:^1.0.6, @lit/react@npm:latest":
   version: 1.0.7
   resolution: "@lit/react@npm:1.0.7"
   peerDependencies:
@@ -345,14 +352,14 @@ __metadata:
   resolution: "@mflt/f-react-e@workspace:code/packages/f-react-e"
   dependencies:
     "@mflt/_fe": "npm:latest"
+    "@shoelace-style/shoelace": "npm:latest"
     "@types/node": "npm:latest"
     react: "npm:^18.2.0 || ^19.0.0"
-    tamagui: "npm:latest"
     typescript: "npm:beta"
   peerDependencies:
     "@mflt/_fe": "*"
+    "@shoelace-style/shoelace": "*"
     react: "*"
-    tamagui: "*"
   languageName: unknown
   linkType: soft
 
@@ -362,7 +369,15 @@ __metadata:
   dependencies:
     "@mflt/_fe": "npm:latest"
     "@types/node": "npm:latest"
+    embla-carousel-fade: "npm:latest"
+    embla-carousel-react: "npm:latest"
+    tamagui: "npm:latest"
     typescript: "npm:beta"
+  peerDependencies:
+    "@mflt/_fe": "*"
+    embla-carousel-fade: "*"
+    embla-carousel-react: "*"
+    tamagui: "*"
   languageName: unknown
   linkType: soft
 
@@ -504,6 +519,36 @@ __metadata:
   version: 1.1.0
   resolution: "@rtsao/scc@npm:1.1.0"
   checksum: 10/17d04adf404e04c1e61391ed97bca5117d4c2767a76ae3e879390d6dec7b317fcae68afbf9e98badee075d0b64fa60f287729c4942021b4d19cd01db77385c01
+  languageName: node
+  linkType: hard
+
+"@shoelace-style/animations@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@shoelace-style/animations@npm:1.2.0"
+  checksum: 10/73773147cebc5833f362f01f96245cc156e9619cc04a8ee342bd9d320661d0fce30ba2fee3a515603eb1141da005c163a608b6356fd5b478f50a483bc9806e16
+  languageName: node
+  linkType: hard
+
+"@shoelace-style/localize@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "@shoelace-style/localize@npm:3.2.1"
+  checksum: 10/e22e108a27ce7da6b86a7b2f16f8db69e9b3c7d2aaf4e34fc39023c2f060aa7a5004d02ffd1cce2fbef3de7e5cd2a60e79c77fbba5cbd5e9456881fa3a452db1
+  languageName: node
+  linkType: hard
+
+"@shoelace-style/shoelace@npm:latest":
+  version: 2.20.1
+  resolution: "@shoelace-style/shoelace@npm:2.20.1"
+  dependencies:
+    "@ctrl/tinycolor": "npm:^4.1.0"
+    "@floating-ui/dom": "npm:^1.6.12"
+    "@lit/react": "npm:^1.0.6"
+    "@shoelace-style/animations": "npm:^1.2.0"
+    "@shoelace-style/localize": "npm:^3.2.1"
+    composed-offset-position: "npm:^0.0.6"
+    lit: "npm:^3.2.1"
+    qr-creator: "npm:^1.0.0"
+  checksum: 10/c3aabeac03d5fd5bc43799783562ab09c92bae98efbc43a931c7dcec608acc393771b6ed0da3f29e08570bb9d9a9e3bff7637cbf6f79ba7aa439f6641da4eb7c
   languageName: node
   linkType: hard
 
@@ -2568,6 +2613,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"composed-offset-position@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "composed-offset-position@npm:0.0.6"
+  peerDependencies:
+    "@floating-ui/utils": ^0.2.5
+  checksum: 10/f0e403f11a6a677631d39b5e7a742c242067c44c2278c6616362d46ee2b9a376dd9cb2d676640bf1f395cc69da52e5ebac9cd5b4f4dc51d9f4d6f2cb60d4a49b
+  languageName: node
+  linkType: hard
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -2754,6 +2808,43 @@ __metadata:
   version: 1.5.118
   resolution: "electron-to-chromium@npm:1.5.118"
   checksum: 10/58e3a92542ddf7595657cb979f021e148b5eb79da536fe62040a9d2e08448821dc0ddbcfd65e04c14615911d3fbbb4e630548827d31204fb95e7a352624bf6a8
+  languageName: node
+  linkType: hard
+
+"embla-carousel-fade@npm:latest":
+  version: 8.5.2
+  resolution: "embla-carousel-fade@npm:8.5.2"
+  peerDependencies:
+    embla-carousel: 8.5.2
+  checksum: 10/e872ef13c01c9b817b2d7180d0186f1526a28186802c919c2752e188037225b3e1af35e910db975fba136926b13a92643adc8dc12cc448607c86b7922b54a4e0
+  languageName: node
+  linkType: hard
+
+"embla-carousel-react@npm:latest":
+  version: 8.5.2
+  resolution: "embla-carousel-react@npm:8.5.2"
+  dependencies:
+    embla-carousel: "npm:8.5.2"
+    embla-carousel-reactive-utils: "npm:8.5.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  checksum: 10/7390154357ffad9eb4641d5d5cd7ed061d33dfaa02c7cfb1b8828e562fe0b7dfb1a0590108db832179a9c4453184b63926d4d4403ba576e8ea6710bad9fd13f0
+  languageName: node
+  linkType: hard
+
+"embla-carousel-reactive-utils@npm:8.5.2":
+  version: 8.5.2
+  resolution: "embla-carousel-reactive-utils@npm:8.5.2"
+  peerDependencies:
+    embla-carousel: 8.5.2
+  checksum: 10/b46011e7031af6642673a7ded7139559ea8af12bf61a6e9aab1ae8006cabafce78ad0c7a3e1c425e96a0fa22de02849fd6d07e86bc118da26cf84eaedccd8a6f
+  languageName: node
+  linkType: hard
+
+"embla-carousel@npm:8.5.2":
+  version: 8.5.2
+  resolution: "embla-carousel@npm:8.5.2"
+  checksum: 10/ed1407d38b86523d4d5abd88ab47804f08e194fb0da0b4b225013ca217d5bb9c40c0899e31261ba2b1748101ae9ccb02a3eaf08d509080f85c9229223f8f8ff3
   languageName: node
   linkType: hard
 
@@ -4200,7 +4291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lit@npm:^2.5.0 || ^3.1.3, lit@npm:^3.1.2, lit@npm:^3.2.0, lit@npm:latest":
+"lit@npm:^2.5.0 || ^3.1.3, lit@npm:^3.1.2, lit@npm:^3.2.0, lit@npm:^3.2.1, lit@npm:latest":
   version: 3.2.1
   resolution: "lit@npm:3.2.1"
   dependencies:
@@ -4781,6 +4872,13 @@ __metadata:
   version: 6.1.0
   resolution: "pure-rand@npm:6.1.0"
   checksum: 10/256aa4bcaf9297256f552914e03cbdb0039c8fe1db11fa1e6d3f80790e16e563eb0a859a1e61082a95e224fc0c608661839439f8ecc6a3db4e48d46d99216ee4
+  languageName: node
+  linkType: hard
+
+"qr-creator@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "qr-creator@npm:1.0.0"
+  checksum: 10/77325a895fabfc899a54f0fc4598696dc234dc5056714181bbadb62bb15944366be7cd56ec19e36eb6e92a99f086143435f654855e512726bd8923149d94f709
   languageName: node
   linkType: hard
 

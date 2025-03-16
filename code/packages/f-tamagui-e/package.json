@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.8.2503a",
+  "version": "0.2503.1",
   "description": "",
   "//": "",
   "#recent-changes": [],
@@ -19,9 +19,9 @@
       "node": "./_/esm/index.js",
       "default": "./_/esm/index.js"
     },
-    "./job-blocks-sequencer": {
-      "types": "./_/dts/job-blocks-sequencer/job-blocks-sequencer.d.ts",
-      "import": "./_/esm/job-blocks-sequencer/job-blocks-sequencer.js"
+    "./BlocksSlider": {
+      "types": "./_/dts/components/BlocksSlider.d.ts",
+      "import": "./_/esm/components/BlocksSlider.js"
     }
   },
   "files": [
@@ -42,7 +42,16 @@
   },
   "devDependencies": {
     "@types/node": "latest",
+    "embla-carousel-fade": "latest",
+    "embla-carousel-react": "latest",
+    "tamagui": "latest",
     "typescript": "beta"
+  },
+  "peerDependencies": {
+    "@mflt/_fe": "*",
+    "embla-carousel-fade": "*",
+    "embla-carousel-react": "*",
+    "tamagui": "*"
   },
   "repository": {
     "type": "git",
