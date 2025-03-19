@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react'
 import { WithMeasuredPeakHeight, type WithMeasuredPeakHeightProps, usePeakHeightObserver, type MeasurableEl } from '@mflt/f-react-e'
-import type { 
-  SlCarousel as FeShoelaceCarouselEl, 
+import type {
+  SlCarousel as FeShoelaceCarouselEl,
   SlCarouselItem as FeShoelaceCarouselItem,
   SlSlideChangeEvent as FeShoelaceSlideChangeEvent
 } from '@shoelace-style/shoelace'
@@ -20,6 +20,7 @@ export const FeShoelaceCarousel = (props: {
     carouselCssClass?: string,
     carouselItemCssClass?: string,
     orientation?: FeShoelaceCarouselEl['orientation']
+    // @TODO debounce
   } & WithMeasuredPeakHeightProps
 ) => {
 
@@ -53,21 +54,21 @@ export const FeShoelaceCarousel = (props: {
         .feDefaultShoelaceCarouselClass::part(pagination-item) {}
       `}
     </style>
-    <Suspense 
+    <Suspense
       fallback={<div>:)</div>}  // @TODO
     >
-      <SlCarousel 
+      <SlCarousel
         ref={props?.carouselRef}
         className={ props.carouselCssClass ?? 'feDefaultShoelaceCarouselClass'}
         orientation={ props.orientation ?? 'vertical'}
-        pagination={false} 
+        pagination={false}
         style={{
           height: rollingPeakHeightRef.current
       }}>
-        {props?.contentItems?.map((content,key) => (
+        {props?.contentItems?.map((slideContent, key) => (
           <SlCarouselItem key={key}>
-            <WithMeasuredPeakHeight 
-              setPeakHeight={props?.setPeakHeight || _setPeakHeight} 
+            <WithMeasuredPeakHeight
+              setPeakHeight={props?.setPeakHeight || _setPeakHeight}
               rollingPeakHeight={rollingPeakHeightRef}
             >
               <p // @TODO p?
@@ -76,12 +77,12 @@ export const FeShoelaceCarousel = (props: {
                   'text-balance mx-auto flex items-center gap-2 text-center text-gray-100 font-normal text-[1.15rem] leading-[1.8rem]'
                 }
               >
-                {content}
+                {slideContent}
               </p>
             </WithMeasuredPeakHeight>
           </SlCarouselItem>
         ))}
       </SlCarousel>
     </Suspense>
-  </>  
+  </>
 }
