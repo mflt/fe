@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.2503.1",
+  "version": "0.2503.2",
   "description": "",
   "//": "",
   "#recent-changes": [],
@@ -22,6 +22,10 @@
     "./BlocksSlider": {
       "types": "./_/dts/components/BlocksSlider.d.ts",
       "import": "./_/esm/components/BlocksSlider.js"
+    },
+    "./helpers": {
+      "types": "./_/dts/helpers/index.d.ts",
+      "import": "./_/esm/helpers/index.js"
     }
   },
   "files": [
