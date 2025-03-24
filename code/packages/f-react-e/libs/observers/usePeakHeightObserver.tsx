@@ -3,11 +3,11 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 
 export type MeasurableEl = HTMLDivElement /*| typeof View*/ | null
 
-export type WithMeasuredPeakHeightProps = {
+export type WithMeasuredPeakHeightProps = React.PropsWithChildren & {
   rollingPeakHeight?: React.MutableRefObject<number>, // @TODO MutableRefObject vs React 19
   setPeakHeight?: React.Dispatch<React.SetStateAction<number>>,
   // parentWidth?: number,
-  children?: any,
+  // children?: any,
   // measuredElsRef: React.MutableRefObject<MeasurableEl[]>
   // @TODO add style option
 }
