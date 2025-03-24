@@ -373,6 +373,7 @@ __metadata:
     embla-carousel-react: "npm:latest"
     tamagui: "npm:latest"
     typescript: "npm:beta"
+    use-debounce: "npm:latest"
   peerDependencies:
     "@mflt/_fe": "*"
     embla-carousel-fade: "*"
@@ -5796,6 +5797,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/adf06a7b6a27d3651c325ac9b66d2b82ccacaed7450b85b211d123e91d9a23cb5a587fcc6db5b4fd07ac7233e5abf024d30cf02ddc2ec46bca712151c0836151
+  languageName: node
+  linkType: hard
+
+"use-debounce@npm:latest":
+  version: 10.0.4
+  resolution: "use-debounce@npm:10.0.4"
+  peerDependencies:
+    react: "*"
+  checksum: 10/e193bbed307204b655abab545704ca608b23db10680f299f4b9b48b935a9fd68b68827c79de3bf5517010524bfa15709bf6b0ab1f915d6305b5d2ce27bf11ad7
   languageName: node
   linkType: hard
 

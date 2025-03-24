@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.2503.2",
+  "version": "0.2503.3",
   "description": "",
   "//": "",
   "#recent-changes": [],
@@ -42,7 +42,8 @@
     "dev:publish-unlink": "bun unlink"
   },
   "dependencies": {
-    "@mflt/_fe": "latest"
+    "@mflt/_fe": "latest",
+    "use-debounce": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
