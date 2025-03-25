@@ -72,7 +72,9 @@ export const usePeakHeightObserver = (
           // props.setPeakHeight?.(height)
         }
       // setDimensions([ Math.round(width), Math.round(height) ])
-    })
+      },
+      recordedDims
+    )
 
     return el
     // return () => {
