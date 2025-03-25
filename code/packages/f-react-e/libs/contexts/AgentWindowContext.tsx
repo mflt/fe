@@ -18,11 +18,11 @@ const getWindowDims = (
   } as Omit<IAgentWindowContext,'_window'>
 }
 
-export const InitAgentWindowContext = (props: React.PropsWithChildren & {
+export function AgentWindowContextProvider (props: React.PropsWithChildren & { // aka Provider
   skipSetup?: (() => boolean) | boolean
-}) => {
+}) {
   const {
-    children,
+    children: slot,
     skipSetup = false
   } = props
 
@@ -61,12 +61,12 @@ export const InitAgentWindowContext = (props: React.PropsWithChildren & {
     }
   }, [_window])
 
-  return <AgentWindowContext value={{
+  return <AgentWindowContext.Provider value={{
     _window,
     ...dims
   }}>
-    {children}
-  </AgentWindowContext>
+    {slot}
+  </AgentWindowContext.Provider>
 }
 
 // https://stackoverflow.com/a/73366256

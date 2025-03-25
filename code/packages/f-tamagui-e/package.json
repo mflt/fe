@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.2503.4",
+  "version": "0.2503.5",
   "description": "",
   "//": "",
   "#recent-changes": [],
@@ -54,9 +54,10 @@
   },
   "peerDependencies": {
     "@mflt/_fe": "*",
+    "react": "*",
+    "tamagui": "*",
     "embla-carousel-fade": "*",
-    "embla-carousel-react": "*",
-    "tamagui": "*"
+    "embla-carousel-react": "*"
   },
   "repository": {
     "type": "git",

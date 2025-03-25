@@ -38,7 +38,7 @@ export type SlidesEntriesChBlocksArray <  // CodeHike Block
   K extends SlidesEntryHead = string | undefined
 > = Array<{
   title?: string,
-  children?: C
+  children?: C  // @TODO slot
 }>
 export type SlidesEntriesCollection <
   C extends SlideContentBlock = SlideContentBlock,  // value comes first, key type is optional
