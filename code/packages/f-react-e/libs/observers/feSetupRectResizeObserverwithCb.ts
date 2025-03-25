@@ -1,6 +1,6 @@
 import React from 'react'
 
-export type FeTrackedRectEl = HTMLDivElement /*| typeof View*/ | null
+export type FeTrackedRectEl = Parameters<ResizeObserver['observe']>[0] /*| typeof View*/
 export type FeTrackedRectDims = Pick<DOMRect, 'width'|'height'>
 
 export function feSetupRectResizeObserverwithCb (
@@ -9,9 +9,10 @@ export function feSetupRectResizeObserverwithCb (
   recordedDims?: React.RefObject<FeTrackedRectDims>,
 ) {
   // @TODO input checks
+  if (!trackedEl) return null;
   const resizeObserver = new ResizeObserver(() => {
 
-    const { width, height } = (trackedEl as HTMLElement)!.getBoundingClientRect()
+    const { width, height } = trackedEl.getBoundingClientRect()
     if (!height || !width) return; // @TODO 
     if (recordedDims?.current) {
       if (recordedDims.current.width === Math.round(width)
@@ -22,6 +23,6 @@ export function feSetupRectResizeObserverwithCb (
     }
     cb?.({width,height})
   })
-  resizeObserver.observe(trackedEl as HTMLElement) 
-  return trackedEl
+  resizeObserver.observe(trackedEl) // ResizeObserverOptions are useless
+  return trackedEl;
 }

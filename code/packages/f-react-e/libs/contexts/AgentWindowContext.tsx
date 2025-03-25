@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useCallback } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 import { _feIsFunction } from '@mflt/_fe'
 
 export interface IAgentWindowContext {
@@ -19,11 +20,13 @@ const getWindowDims = (
 }
 
 export function AgentWindowContextProvider (props: React.PropsWithChildren & { // aka Provider
-  skipSetup?: (() => boolean) | boolean
+  skipSetup?: (() => boolean) | boolean,
+  debounceDelay?: Parameters<typeof useDebouncedCallback>[1],
 }) {
   const {
     children: slot,
-    skipSetup = false
+    skipSetup = false,
+    debounceDelay = 0,
   } = props
 
   const [_window, setWindow] = useState<IAgentWindowContext['_window']>(null)
@@ -40,7 +43,7 @@ export function AgentWindowContextProvider (props: React.PropsWithChildren & { /
     }
   }, [_window, skipSetup]) // @TODO isWeb
 
-  const handleResize = useCallback(() => {
+  const handleResize = useDebouncedCallback(() => {
     let ticking = false
     if (!ticking) {
       const _animationFrameRequestId = window.requestAnimationFrame(() => {
@@ -51,7 +54,7 @@ export function AgentWindowContextProvider (props: React.PropsWithChildren & { /
       // setAnimationFrameRequestId(_animationFrameRequestId)
       ticking = true
     }
-  }, [_window])
+  }, debounceDelay)
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)

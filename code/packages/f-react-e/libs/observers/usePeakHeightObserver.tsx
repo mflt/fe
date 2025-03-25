@@ -1,4 +1,7 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { 
+  useCallback, useEffect, useLayoutEffect, useRef, useState 
+} from 'react'
+import { useDebounce } from 'use-debounce'
 // import type { View } from 'tamagui'
 import { 
   feSetupRectResizeObserverwithCb, 
@@ -8,6 +11,7 @@ import {
 export type WithMeasuredPeakHeightProps = React.PropsWithChildren & {
   rollingPeakHeight?: React.MutableRefObject<number>, // @TODO MutableRefObject vs React 19
   setPeakHeight?: React.Dispatch<React.SetStateAction<number>>,
+  debounceDelay?: Parameters<typeof useDebounce>[1],
   // parentWidth?: number,
   // children?: any,
   // measuredElsRef: React.MutableRefObject<MeasurableEl[]>
@@ -93,7 +97,8 @@ export const WithMeasuredPeakHeight = (props:
   WithMeasuredPeakHeightProps
 ) => { // @TODO test again
   const selfRef = useRef<HTMLDivElement|null>(null)
-  const [width, height] = useWidthAndHeightofRef(selfRef)
+  const _dims = useWidthAndHeightofRef(selfRef)
+  const [[width, height]] = useDebounce(_dims, props?.debounceDelay || 0)
   const [recordedWidth, setRecordedWidth] = useState<number>(0)
 
   useEffect(() => {
@@ -127,11 +132,11 @@ export const useWidthAndHeightofRef = (
   useEffect(() => {
     if (!ref?.current) return
     const resizeObserver = new ResizeObserver(() => {
-      const { width, height } = ref?.current? (ref.current as HTMLDivElement).getBoundingClientRect() : {}
+      const { width, height } = ref?.current? ref.current.getBoundingClientRect() : {}
       // console.log('OBSERVING REF HOOK H', height)
       setDimensions([ Math.round(width||0), Math.round(height||0) ])
     });
-    resizeObserver.observe(ref.current as HTMLDivElement) // @TODO RN thing are not measured here
+    resizeObserver.observe(ref.current) // @TODO RN thing are not measured here
     return () => resizeObserver.disconnect()
   }, [ref])
   return dimensions

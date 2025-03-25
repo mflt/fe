@@ -1,8 +1,11 @@
 {
   "name": "@mflt/f-react-e",
-  "version": "0.2503.11",
+  "version": "0.2503.12",
   "description": "",
-  "//": "",
+  "//": [
+    "Direct deps are not defined. Which may cause conflicts with older or newer versions.",
+    "React is not listed among deps, as it comes with tamagui"
+  ],
   "#recent-changes": [],
   "#todos": [
     ""
@@ -42,18 +45,20 @@
     "dev:publish-unlink": "bun unlink"
   },
   "dependencies": {
-    "@mflt/_fe": "latest"
   },
   "devDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "@mflt/_fe": "latest",
+    "use-debounce": "latest",
     "@shoelace-style/shoelace": "latest",
     "@types/node": "latest",
-    "react": "^18.2.0 || ^19.0.0",
     "typescript": "beta"
   },
   "peerDependencies": {
+    "react": "*",
     "@mflt/_fe": "*",
-    "@shoelace-style/shoelace": "*",
-    "react": "*"
+    "use-debounce": "*",
+    "@shoelace-style/shoelace": "*"
   },
   "repository": {
     "type": "git",
