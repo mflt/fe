@@ -34,11 +34,11 @@ export function AgentWindowContextProvider (props: React.PropsWithChildren & { /
   ] = useState<ReturnType<typeof window.requestAnimationFrame>|undefined>(undefined)
 
   useEffect(() => {
-    if (_feIsFunction(skipSetup)? skipSetup() : skipSetup) {
+    if (!(_feIsFunction(skipSetup)? skipSetup() : skipSetup)) {
       setWindow(window)
       setDims(getWindowDims(_window))
     }
-  }, [_window]) // @TODO isWeb
+  }, [_window, skipSetup]) // @TODO isWeb
 
   const handleResize = useCallback(() => {
     let ticking = false

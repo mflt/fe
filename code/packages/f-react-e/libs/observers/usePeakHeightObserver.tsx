@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 // import type { View } from 'tamagui'
-
-export type MeasurableEl = HTMLDivElement /*| typeof View*/ | null
+import { 
+  feSetupRectResizeObserverwithCb, 
+  type FeTrackedRectEl, type FeTrackedRectDims 
+} from './feSetupRectResizeObserverwithCb'
 
 export type WithMeasuredPeakHeightProps = React.PropsWithChildren & {
   rollingPeakHeight?: React.MutableRefObject<number>, // @TODO MutableRefObject vs React 19
@@ -12,17 +14,19 @@ export type WithMeasuredPeakHeightProps = React.PropsWithChildren & {
   // @TODO add style option
 }
 
+
 export const usePeakHeightObserver = (
   parentelfRef?: React.MutableRefObject<HTMLDivElement|null>
 ) => {  // @TODO Arrays of content only, similar width!
   // const { measuredElsRef: measuredElsRef } = props
-  const measuredElsSet = useRef(new WeakSet<Exclude<MeasurableEl,null>>()) // @TODO reset is not managed
+  const measuredElsSet = useRef(new WeakSet<Exclude<FeTrackedRectEl,null>>()) // @TODO reset is not managed
+  const recordedDims = useRef<FeTrackedRectDims>({width: 0, height: 0})
   const _recordedWidth = useRef<number>(0)
-  const [recordedWidth, setRecordedWidth] = useState<number>(_recordedWidth.current)
+  // const [recordedWidth, setRecordedWidth] = useState<number>(_recordedWidth.current)
 
   // const observersTracker = useRef(new Map<string,MeasurableEl>())
   // const parentselfRef = useRef<HTMLDivElement|null>(null)
-  const [rollingPeakHeight, setRollingPeakHeight] = useState<number>(0)
+  // const [rollingPeakHeight, setRollingPeakHeight] = useState<number>(0)
   const _rollingPeakHeight = useRef<number>(0)
   // const [measuredContentEl, setMeasuredContentEl] = useState<typeof props['measuredElsRef']['current'][0] | null>(
   //   measuredElsRef.current[0]
@@ -32,15 +36,15 @@ export const usePeakHeightObserver = (
   // const [dimensions, setDimensions] = useState([0, 0])
 
   useEffect(() => { // @TODO does not work
-    if (!parentelfRef || !parentelfRef.current || !rollingPeakHeight) return
+    if (!parentelfRef || !parentelfRef.current /* || !rollingPeakHeight */) return
     // console.log('PARENT H', rollingPeakHeight)
     parentelfRef.current.style.height = String(_rollingPeakHeight.current)
-  }, [_rollingPeakHeight, rollingPeakHeight, parentelfRef, recordedWidth])
+  }, [_rollingPeakHeight, /* rollingPeakHeight, */ parentelfRef, /* recordedWidth */])
 
   // useEffect(() => setRecordedWidth(_recordedWidth.current), [_recordedWidth.current])
 
   const setupResizeObserverforEl = useCallback((
-    el: MeasurableEl,
+    el: FeTrackedRectEl,
     idx: number|string
   ) => {
     // if (measuredElsSet.current.has(el!)) {
@@ -53,24 +57,23 @@ export const usePeakHeightObserver = (
     // measuredElsRef.current[idx] = el
     // console.log('HOOK ADDING')
     // setMeasuredContentEl(el)
-    const resizeObserver = new ResizeObserver(() => {
+    feSetupRectResizeObserverwithCb( 
+      el,
+      ({width, height}: FeTrackedRectDims) => {
 
-      const { width, height } = (el as HTMLElement)!.getBoundingClientRect()
-      // console.log('HOOK OBSERVING HEIGHT', idx, height, 'prev peak', _rollingPeakHeight.current, 'rec width', /* recordedWidth, */ Math.round(width))
-      if (!height || !width) return
-      if (_recordedWidth.current != Math.round(width) || _rollingPeakHeight.current < Math.round(height)) {
-        _rollingPeakHeight.current = Math.round(height)
-        // setRollingPeakHeight(_rollingPeakHeight.current)
-        // console.log('HOOK OBSERVING HEIGHT rec width', recordedWidth, Math.round(width))
-        _recordedWidth.current = Math.round(width)
-        // setDimensions([_recordedWidth.current, _rollingPeakHeight.current])
-        // setRecordedWidth(_recordedWidth.current) // has no effect in this context it seams
-        // setRecordedHeight(height)
-        // props.setPeakHeight?.(height)
-      }
+        if (_recordedWidth.current != Math.round(width) || _rollingPeakHeight.current < Math.round(height)) {
+          _rollingPeakHeight.current = Math.round(height)
+          // setRollingPeakHeight(_rollingPeakHeight.current)
+          // console.log('HOOK OBSERVING HEIGHT rec width', recordedWidth, Math.round(width))
+          _recordedWidth.current = Math.round(width)
+          // setDimensions([_recordedWidth.current, _rollingPeakHeight.current])
+          // setRecordedWidth(_recordedWidth.current) // has no effect in this context it seams
+          // setRecordedHeight(height)
+          // props.setPeakHeight?.(height)
+        }
       // setDimensions([ Math.round(width), Math.round(height) ])
     })
-    resizeObserver.observe(el as HTMLElement) // @TODO RN thing are not measured here
+
     return el
     // return () => {
     //   measuredElsSet.current.delete(el) // @TODO
@@ -115,7 +118,7 @@ export const WithMeasuredPeakHeight = (props:
 }
 
 export const useWidthAndHeightofRef = (
-  ref: React.MutableRefObject<MeasurableEl>
+  ref: React.MutableRefObject<FeTrackedRectEl>
 ) => {
   const [dimensions, setDimensions] = useState([0, 0])
 

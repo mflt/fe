@@ -14,7 +14,7 @@ import EmblaCarouselFade from 'embla-carousel-fade'
 // import { ActiveCircle } from '../../../vendor-snap/tamagui.dev/components/ActiveCircle'
 // import { ArrowLeft, ArrowRight } from '@tamagui/lucide-icons'
 import { _feIsObject, _feIsArray, _feIsMap } from '@mflt/_fe'
-import { WithMeasuredPeakHeight, useWidthAndHeightofRef, usePeakHeightObserver, type MeasurableEl } from '@mflt/f-react-e'
+import { WithMeasuredPeakHeight, useWidthAndHeightofRef, usePeakHeightObserver, type FeTrackedRectEl } from '@mflt/f-react-e'
 
 export type SlideContentBlock = React.JSX.Element|React.ReactNode|null
 export type SlidesEntryHeadwPyl = {
@@ -171,7 +171,7 @@ export function FeTamaBlocksSlider <
       <div
         // 'slideNode'
         // @ts-ignore @TODO
-        ref={(el: MeasurableEl) => setupResizeObserverforEl?.(el, idx)} // slidesRefs.current[idx] = el}
+        ref={(el: FeTrackedRectEl) => setupResizeObserverforEl?.(el, idx)} // slidesRefs.current[idx] = el}
         key={`slide-${String('label')}-${idx}`}
         style={{
           // height: 500,

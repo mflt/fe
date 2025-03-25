@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react'
-import { WithMeasuredPeakHeight, type WithMeasuredPeakHeightProps, usePeakHeightObserver, type MeasurableEl } from '@mflt/f-react-e'
+import { WithMeasuredPeakHeight, type WithMeasuredPeakHeightProps, usePeakHeightObserver, type FeTrackedRectEl } from '@mflt/f-react-e'
 import type {
   SlCarousel as FeShoelaceCarouselEl,
   SlCarouselItem as FeShoelaceCarouselItem,

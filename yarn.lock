@@ -347,6 +347,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@mflt/f-react-e@npm:latest":
+  version: 0.2503.11
+  resolution: "@mflt/f-react-e@npm:0.2503.11"
+  dependencies:
+    "@mflt/_fe": "npm:latest"
+  peerDependencies:
+    "@mflt/_fe": "*"
+    "@shoelace-style/shoelace": "*"
+    react: "*"
+  checksum: 10/da116b2a00f56c48ce5134657933b43ca5592be8ea2d80445156f9805678f66559b4ccc9661dabd4a101520ecc9284dfbe0d529111d29f4ad8b6e2acdd3b396b
+  languageName: node
+  linkType: hard
+
 "@mflt/f-react-e@workspace:code/packages/f-react-e":
   version: 0.0.0-use.local
   resolution: "@mflt/f-react-e@workspace:code/packages/f-react-e"
@@ -368,6 +381,7 @@ __metadata:
   resolution: "@mflt/f-tamagui-e@workspace:code/packages/f-tamagui-e"
   dependencies:
     "@mflt/_fe": "npm:latest"
+    "@mflt/f-react-e": "npm:latest"
     "@types/node": "npm:latest"
     embla-carousel-fade: "npm:latest"
     embla-carousel-react: "npm:latest"
@@ -376,8 +390,10 @@ __metadata:
     use-debounce: "npm:latest"
   peerDependencies:
     "@mflt/_fe": "*"
+    "@mflt/f-react-e": "*"
     embla-carousel-fade: "*"
     embla-carousel-react: "*"
+    react: "*"
     tamagui: "*"
   languageName: unknown
   linkType: soft
