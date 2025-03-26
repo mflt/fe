@@ -348,15 +348,14 @@ __metadata:
   linkType: soft
 
 "@mflt/f-react-e@npm:latest":
-  version: 0.2503.11
-  resolution: "@mflt/f-react-e@npm:0.2503.11"
-  dependencies:
-    "@mflt/_fe": "npm:latest"
+  version: 0.2503.13
+  resolution: "@mflt/f-react-e@npm:0.2503.13"
   peerDependencies:
     "@mflt/_fe": "*"
     "@shoelace-style/shoelace": "*"
     react: "*"
-  checksum: 10/da116b2a00f56c48ce5134657933b43ca5592be8ea2d80445156f9805678f66559b4ccc9661dabd4a101520ecc9284dfbe0d529111d29f4ad8b6e2acdd3b396b
+    use-debounce: "*"
+  checksum: 10/7e1229765dff78c8a5a950eda5470d8073f10f27c0289386c118eb55f5ca149ef06a390f60cb4d4ca8dc338e7c6f20281545f1e075ea230648fdc84ab1cc8208
   languageName: node
   linkType: hard
 
@@ -369,10 +368,12 @@ __metadata:
     "@types/node": "npm:latest"
     react: "npm:^18.2.0 || ^19.0.0"
     typescript: "npm:beta"
+    use-debounce: "npm:latest"
   peerDependencies:
     "@mflt/_fe": "*"
     "@shoelace-style/shoelace": "*"
     react: "*"
+    use-debounce: "*"
   languageName: unknown
   linkType: soft
 
@@ -395,6 +396,7 @@ __metadata:
     embla-carousel-react: "*"
     react: "*"
     tamagui: "*"
+    use-debounce: "*"
   languageName: unknown
   linkType: soft
 

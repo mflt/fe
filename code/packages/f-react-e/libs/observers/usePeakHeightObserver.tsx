@@ -1,15 +1,16 @@
-import React, { 
-  useCallback, useEffect, useLayoutEffect, useRef, useState 
+import React, {
+  useCallback, useEffect, useLayoutEffect, useRef, useState
 } from 'react'
-import { useDebounce } from 'use-debounce'
+import { useDebounce, useDebouncedCallback } from 'use-debounce'
 // import type { View } from 'tamagui'
-import { 
-  feSetupRectResizeObserverwithCb, 
-  type FeTrackedRectEl, type FeTrackedRectDims 
+import {
+  feSetupRectResizeObserverwithCb,
+  type FeTrackedRectEl, type FeTrackedRectDims,
+  type FeSetupRectResizeObserverwithCbReturnT, type FeSetupRectResizeObserverwithCbOptions
 } from './feSetupRectResizeObserverwithCb'
 
 export type WithMeasuredPeakHeightProps = React.PropsWithChildren & {
-  rollingPeakHeight?: React.MutableRefObject<number>, // @TODO MutableRefObject vs React 19
+  rollingPeakHeight?: React.RefObject<number>, // @TODO MutableRefObject vs React 19
   setPeakHeight?: React.Dispatch<React.SetStateAction<number>>,
   debounceDelay?: Parameters<typeof useDebounce>[1],
   // parentWidth?: number,
@@ -19,19 +20,27 @@ export type WithMeasuredPeakHeightProps = React.PropsWithChildren & {
 }
 
 
-export const usePeakHeightObserver = (
-  parentelfRef?: React.MutableRefObject<HTMLDivElement|null>
+export const usePeakHeightObserverOutlet = (  //
+  options?: FeSetupRectResizeObserverwithCbOptions & {
+    parentelRef?: React.RefObject<HTMLDivElement|null>,
+  }
 ) => {  // @TODO Arrays of content only, similar width!
   // const { measuredElsRef: measuredElsRef } = props
+  const {
+    parentelRef = null,
+    ..._options
+  } = options || {}
   const measuredElsSet = useRef(new WeakSet<Exclude<FeTrackedRectEl,null>>()) // @TODO reset is not managed
-  const recordedDims = useRef<FeTrackedRectDims>({width: 0, height: 0})
-  const _recordedWidth = useRef<number>(0)
+  const resizeObserversSetupResultsSet = useRef(new Set<FeSetupRectResizeObserverwithCbReturnT>()) // @TODO reset is not managed
+  const recordedDims = _options.recordedDims || useRef<FeTrackedRectDims>({width: 0, height: 0})
+  const rollingRecordedWidth = useRef<number>(0)
+  const rollingPeakHeight = useRef<number>(0)
+
   // const [recordedWidth, setRecordedWidth] = useState<number>(_recordedWidth.current)
 
   // const observersTracker = useRef(new Map<string,MeasurableEl>())
   // const parentselfRef = useRef<HTMLDivElement|null>(null)
   // const [rollingPeakHeight, setRollingPeakHeight] = useState<number>(0)
-  const _rollingPeakHeight = useRef<number>(0)
   // const [measuredContentEl, setMeasuredContentEl] = useState<typeof props['measuredElsRef']['current'][0] | null>(
   //   measuredElsRef.current[0]
   // )
@@ -40,60 +49,67 @@ export const usePeakHeightObserver = (
   // const [dimensions, setDimensions] = useState([0, 0])
 
   useEffect(() => { // @TODO does not work
-    if (!parentelfRef || !parentelfRef.current /* || !rollingPeakHeight */) return
-    // console.log('PARENT H', rollingPeakHeight)
-    parentelfRef.current.style.height = String(_rollingPeakHeight.current)
-  }, [_rollingPeakHeight, /* rollingPeakHeight, */ parentelfRef, /* recordedWidth */])
+    if (!!parentelRef?.current /* || !rollingPeakHeight */)
+      parentelRef.current.style.height = String(rollingPeakHeight.current);
+
+    return () => {
+      resizeObserversSetupResultsSet.current.forEach?.(res => res.disconnect()) // @TODO check if works
+    }
+  }, [rollingPeakHeight, /* rollingPeakHeight, */ parentelRef, /* recordedWidth */])
 
   // useEffect(() => setRecordedWidth(_recordedWidth.current), [_recordedWidth.current])
 
   const setupResizeObserverforEl = useCallback((
     el: FeTrackedRectEl,
-    idx: number|string
+    idx: number|string,
+    options?: FeSetupRectResizeObserverwithCbOptions, // mind that partent also has options
   ) => {
-    // if (measuredElsSet.current.has(el!)) {
-    //   console.log('HOOK NO-PUSH', idx, 'stored', !!el)
-    //   return el
-    // }
-    if (!el || measuredElsSet.current.has(el)) return el
+    const mergedOptions = Object.assign({},
+      _options,
+      {recordedDims},
+      options
+    )
+    if (!el || measuredElsSet.current.has(el)) return null;
     measuredElsSet.current.add(el)
-    // console.log('HOOK PUSHED', idx, !el && measuredElsSet.current.has(el)? 'stored' : el)
     // measuredElsRef.current[idx] = el
-    // console.log('HOOK ADDING')
     // setMeasuredContentEl(el)
-    feSetupRectResizeObserverwithCb( 
+    const _setupRes = feSetupRectResizeObserverwithCb(
       el,
-      ({width, height}: FeTrackedRectDims) => {
+      ({width, height}) => {
 
-        if (_recordedWidth.current != Math.round(width) || _rollingPeakHeight.current < Math.round(height)) {
-          _rollingPeakHeight.current = Math.round(height)
+        if (rollingRecordedWidth.current != Math.round(width)
+          || rollingPeakHeight.current < Math.round(height)
+        ) {
+          rollingPeakHeight.current = Math.round(height)
           // setRollingPeakHeight(_rollingPeakHeight.current)
           // console.log('HOOK OBSERVING HEIGHT rec width', recordedWidth, Math.round(width))
-          _recordedWidth.current = Math.round(width)
+          rollingRecordedWidth.current = Math.round(width)
           // setDimensions([_recordedWidth.current, _rollingPeakHeight.current])
           // setRecordedWidth(_recordedWidth.current) // has no effect in this context it seams
           // setRecordedHeight(height)
           // props.setPeakHeight?.(height)
         }
-      // setDimensions([ Math.round(width), Math.round(height) ])
+        // setDimensions([ Math.round(width), Math.round(height) ])
       },
-      recordedDims
+      mergedOptions
     )
 
-    return el
+    if (!!_setupRes)  resizeObserversSetupResultsSet.current.add(_setupRes);
+    return _setupRes
     // return () => {
     //   measuredElsSet.current.delete(el) // @TODO
     //   // resizeObserver.disconnect()
     // }
   }, [])
 
-  const usePeakHeight = useCallback(() => _rollingPeakHeight.current, [])
+  const usePeakHeight = useDebouncedCallback(() => rollingPeakHeight.current, _options?.debounceDelay || 0)
+  // @TODO isn't it a dublication? ... tho the debounceDelay values in the ro callbacks may be different
 
   return {usePeakHeight, setupResizeObserverforEl}
 }
 
 
-export const WithMeasuredPeakHeight = (props: 
+export const WithMeasuredPeakHeight = (props:
   WithMeasuredPeakHeightProps
 ) => { // @TODO test again
   const selfRef = useRef<HTMLDivElement|null>(null)
@@ -102,7 +118,7 @@ export const WithMeasuredPeakHeight = (props:
   const [recordedWidth, setRecordedWidth] = useState<number>(0)
 
   useEffect(() => {
-    if (width)  
+    if (width)
       setRecordedWidth(width)
     // console.log('WIDH',width)
   }, [width])
@@ -125,19 +141,26 @@ export const WithMeasuredPeakHeight = (props:
 }
 
 export const useWidthAndHeightofRef = (
-  ref: React.MutableRefObject<FeTrackedRectEl>
+  ref: React.RefObject<FeTrackedRectEl|null>,
+  options?: FeSetupRectResizeObserverwithCbOptions
 ) => {
-  const [dimensions, setDimensions] = useState([0, 0])
+  const [dims, setDimensions] = useState([0, 0])
 
   useEffect(() => {
-    if (!ref?.current) return
-    const resizeObserver = new ResizeObserver(() => {
-      const { width, height } = ref?.current? ref.current.getBoundingClientRect() : {}
-      // console.log('OBSERVING REF HOOK H', height)
-      setDimensions([ Math.round(width||0), Math.round(height||0) ])
-    });
-    resizeObserver.observe(ref.current) // @TODO RN thing are not measured here
-    return () => resizeObserver.disconnect()
+    const _setupRes = feSetupRectResizeObserverwithCb(
+      ref.current,
+      ({width, height}) => {
+        setDimensions([ Math.round(width||0), Math.round(height||0) ])
+      },
+      options
+    )
+    // if (!ref?.current) return;
+    // const resizeObserver = new ResizeObserver(() => {
+    //   const { width, height } = ref?.current? ref.current.getBoundingClientRect() : {}
+    //   setDimensions([ Math.round(width||0), Math.round(height||0) ])
+    // });
+    // resizeObserver.observe(ref.current) // @TODO RN thing are not measured here
+    return () => _setupRes?.disconnect   // @TODO check if works
   }, [ref])
-  return dimensions
+  return dims
 }

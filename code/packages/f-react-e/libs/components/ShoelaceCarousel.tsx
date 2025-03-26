@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react'
-import { WithMeasuredPeakHeight, type WithMeasuredPeakHeightProps, usePeakHeightObserver, type FeTrackedRectEl } from '@mflt/f-react-e'
+// import type { FeTrackedRectEl} from '../observers/feSetupRectResizeObserverwithCb'
+import { WithMeasuredPeakHeight, type WithMeasuredPeakHeightProps  } from '../observers/usePeakHeightObserver'
 import type {
   SlCarousel as FeShoelaceCarouselEl,
   SlCarouselItem as FeShoelaceCarouselItem,
@@ -70,6 +71,7 @@ export const FeShoelaceCarousel = (props: {
             <WithMeasuredPeakHeight
               setPeakHeight={props?.setPeakHeight || _setPeakHeight}
               rollingPeakHeight={rollingPeakHeightRef}
+              // @TODO debounceDelay
             >
               <p // @TODO p?
                 className={

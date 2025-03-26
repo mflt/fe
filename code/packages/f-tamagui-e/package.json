@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.2503.7",
+  "version": "0.2503.8",
   "description": "",
   "//": [
     "See f-react-e"
@@ -43,26 +43,24 @@
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
   },
-  "dependencies": {
-  },
   "devDependencies": {
-    "tamagui": "latest",
     "@mflt/_fe": "latest",
     "@mflt/f-react-e": "latest",
-    "use-debounce": "latest",
+    "@types/node": "latest",
     "embla-carousel-fade": "latest",
     "embla-carousel-react": "latest",
-    "@types/node": "latest",
-    "typescript": "beta"
+    "tamagui": "latest",
+    "typescript": "beta",
+    "use-debounce": "latest"
   },
   "peerDependencies": {
-    "react": "*",
-    "tamagui": "*",
     "@mflt/_fe": "*",
     "@mflt/f-react-e": "*",
-    "use-debounce": "*",
     "embla-carousel-fade": "*",
-    "embla-carousel-react": "*"
+    "embla-carousel-react": "*",
+    "react": "*",
+    "tamagui": "*",
+    "use-debounce": "*"
   },
   "repository": {
     "type": "git",

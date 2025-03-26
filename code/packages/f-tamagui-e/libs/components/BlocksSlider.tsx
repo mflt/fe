@@ -1,7 +1,7 @@
 // import { z, ZodObject } from 'zod'
 import React, {
-  type SetStateAction, lazy, Suspense,
-  memo, useEffect, useLayoutEffect, useMemo, useRef, useState, useCallback
+  type SetStateAction,
+  useMemo, useRef, useState, useCallback
 } from 'react'
 import { useDebounce } from 'use-debounce'
 import {
@@ -14,7 +14,10 @@ import EmblaCarouselFade from 'embla-carousel-fade'
 // import { ActiveCircle } from '../../../vendor-snap/tamagui.dev/components/ActiveCircle'
 // import { ArrowLeft, ArrowRight } from '@tamagui/lucide-icons'
 import { _feIsObject, _feIsArray, _feIsMap } from '@mflt/_fe'
-import { WithMeasuredPeakHeight, useWidthAndHeightofRef, usePeakHeightObserver, type FeTrackedRectEl } from '@mflt/f-react-e'
+import {
+  type FeTrackedRectEl, type FeSetupRectResizeObserverwithCbOptions,
+  useWidthAndHeightofRef, usePeakHeightObserverOutlet, // type FeTrackedRectEl
+} from '@mflt/f-react-e'  // '../../../f-react-e/libs/observers/usePeakHeightObserver'
 
 export type SlideContentBlock = React.JSX.Element|React.ReactNode|null
 export type SlidesEntryHeadwPyl = {
@@ -69,7 +72,7 @@ export type FeTamaBlocksSliderProps < // @TODO WIP!!!
       // @TODO minHeight ...
       carouselFallbackMinHeight?: string, // @TODO type
     },
-    debounceDelay?: Parameters<typeof useDebounce>[1]
+    debounceDelay?: FeSetupRectResizeObserverwithCbOptions['debounceDelay'],
   },
   // children?: React.ReactNode
 }
@@ -148,12 +151,9 @@ export function FeTamaBlocksSlider <
   }, [pageIdx, updateActiveIdx])
 
   const selfRef = useRef<HTMLDivElement|null>(null)
-  const [selfWidth] = useWidthAndHeightofRef(selfRef) // tracks the wrappers's width
-  const {usePeakHeight, setupResizeObserverforEl} = usePeakHeightObserver() // Actually works w/o it if used like usememo below
+  const [selfWidth,] = useWidthAndHeightofRef(selfRef, {debounceDelay}) // tracks the wrappers's width
+  const {usePeakHeight, setupResizeObserverforEl} = usePeakHeightObserverOutlet({debounceDelay}) // Actually works w/o it if used like usememo below
   const peakContentHeight = usePeakHeight()
-
-  const [_selfWidth] = useDebounce(selfWidth, debounceDelay)
-  const [_peakContentHeight] = useDebounce(peakContentHeight, debounceDelay)
 
   // const rollingPeakContentHeigh = useRef<number>(0)
   // const [_peakContentHeight, _setPeakHeight] = useState<number>(carouselHeightFALLBACK)
@@ -171,7 +171,7 @@ export function FeTamaBlocksSlider <
       <div
         // 'slideNode'
         // @ts-ignore @TODO
-        ref={(el: FeTrackedRectEl) => setupResizeObserverforEl?.(el, idx)} // slidesRefs.current[idx] = el}
+        ref={(el: FeTrackedRectEl) => setupResizeObserverforEl?.(el, idx)?.trackedEl} // slidesRefs.current[idx] = el}
         key={`slide-${String('label')}-${idx}`}
         style={{
           // height: 500,
@@ -210,7 +210,7 @@ export function FeTamaBlocksSlider <
       </div>
     )
   }), [
-    contentEntriesArray, _peakContentHeight, _selfWidth, setupResizeObserverforEl, isChBlocksCase
+    contentEntriesArray, peakContentHeight, selfWidth, setupResizeObserverforEl, isChBlocksCase
   ])
 
   const Carousel = useMemo(() => (false // !isClient || !_selfWidth
@@ -230,7 +230,7 @@ export function FeTamaBlocksSlider <
         ref={scrollerRootRef}
         onClick={() => paginate(1)}
         style={{
-          height: _peakContentHeight,
+          height: peakContentHeight,
           // width: 600,
           overflow: 'hidden',
           // backgroundColor: 'lightblue',
@@ -245,7 +245,7 @@ export function FeTamaBlocksSlider <
         </div>
       </div>
   ), [
-    Slides, paginate, scrollerRootRef, _peakContentHeight /* _selfWidth setPeakHeight, */
+    Slides, paginate, scrollerRootRef, peakContentHeight /* _selfWidth setPeakHeight, */
   ])
 
   if (!contentEntriesCollection || !contentEntriesN) return (<div />) // @TODO <div />

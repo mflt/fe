@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-react-e",
-  "version": "0.2503.12",
+  "version": "0.2503.14",
   "description": "",
   "//": [
     "Direct deps are not defined. Which may cause conflicts with older or newer versions.",
@@ -44,21 +44,19 @@
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
   },
-  "dependencies": {
-  },
   "devDependencies": {
-    "react": "^18.2.0 || ^19.0.0",
     "@mflt/_fe": "latest",
-    "use-debounce": "latest",
     "@shoelace-style/shoelace": "latest",
     "@types/node": "latest",
-    "typescript": "beta"
+    "react": "^18.2.0 || ^19.0.0",
+    "typescript": "beta",
+    "use-debounce": "latest"
   },
   "peerDependencies": {
-    "react": "*",
     "@mflt/_fe": "*",
-    "use-debounce": "*",
-    "@shoelace-style/shoelace": "*"
+    "@shoelace-style/shoelace": "*",
+    "react": "*",
+    "use-debounce": "*"
   },
   "repository": {
     "type": "git",
