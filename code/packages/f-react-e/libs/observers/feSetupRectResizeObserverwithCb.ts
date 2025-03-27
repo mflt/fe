@@ -1,12 +1,12 @@
 import React from 'react'
-import { useDebouncedCallback } from 'use-debounce'
+import { debounce } from '@tamagui/use-debounce'
 import { _feIsFunction } from '@mflt/_fe'
 
 export type FeTrackedRectEl = Parameters<ResizeObserver['observe']>[0] /*| typeof View*/
 export type FeTrackedRectDims = Pick<DOMRect, 'width'|'height'>
 export type FeSetupRectResizeObserverwithCbOptions = {
   recordedDims?: React.RefObject<FeTrackedRectDims>,  // will be rounded
-  debounceDelay?: Parameters<typeof useDebouncedCallback>[1],
+  debounceDelay?: Parameters<typeof debounce>[1],
   callCbEvenwithZeros?: boolean,
   callCbEvenifUnchanged?: boolean,
 }
@@ -24,7 +24,7 @@ export function feSetupRectResizeObserverwithCb (
   // @TODO input checks
   if (!trackedEl) return null;
   if (!_feIsFunction(cb)) return null;
-  const cbDebounced = cb // useDebouncedCallback(cb, options?.debounceDelay || 0)
+  const cbDebounced = debounce(cb, options?.debounceDelay || 0) // useDebouncedCallback(cb, options?.debounceDelay || 0)
   const resizeObserver = new ResizeObserver(
     (entries: ResizeObserverEntry[], observer: ResizeObserver) => {
 
@@ -43,5 +43,11 @@ export function feSetupRectResizeObserverwithCb (
   )
 
   resizeObserver.observe(trackedEl) // ResizeObserverOptions are useless
-  return {trackedEl, resizeObserver, disconnect: resizeObserver.disconnect}
+  const disconnect = () => {
+    // @TODO 
+    // if (!trackedEl) resizeObserver.disconnect()
+    // else resizeObserver.unobserve(trackedEl)
+    // cbDebounced.cancel()  // @TODO does not seem to have effect, it works, but works without it as well
+  }
+  return {trackedEl, resizeObserver, disconnect}
 }

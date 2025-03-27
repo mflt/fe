@@ -348,14 +348,15 @@ __metadata:
   linkType: soft
 
 "@mflt/f-react-e@npm:latest":
-  version: 0.2503.13
-  resolution: "@mflt/f-react-e@npm:0.2503.13"
+  version: 0.2503.16
+  resolution: "@mflt/f-react-e@npm:0.2503.16"
   peerDependencies:
     "@mflt/_fe": "*"
     "@shoelace-style/shoelace": "*"
+    "@tamagui/use-debounce": "*"
     react: "*"
     use-debounce: "*"
-  checksum: 10/7e1229765dff78c8a5a950eda5470d8073f10f27c0289386c118eb55f5ca149ef06a390f60cb4d4ca8dc338e7c6f20281545f1e075ea230648fdc84ab1cc8208
+  checksum: 10/f07c48549404530d3766c7662bf0ac20147a302776802f135777a50588d243eb9034fec23b0628ea6e9e535f833b50010db83867f80b72d5849d5e606fff35c3
   languageName: node
   linkType: hard
 
@@ -365,6 +366,7 @@ __metadata:
   dependencies:
     "@mflt/_fe": "npm:latest"
     "@shoelace-style/shoelace": "npm:latest"
+    "@tamagui/use-debounce": "npm:latest"
     "@types/node": "npm:latest"
     react: "npm:^18.2.0 || ^19.0.0"
     typescript: "npm:beta"
@@ -372,6 +374,7 @@ __metadata:
   peerDependencies:
     "@mflt/_fe": "*"
     "@shoelace-style/shoelace": "*"
+    "@tamagui/use-debounce": "*"
     react: "*"
     use-debounce: "*"
   languageName: unknown
@@ -1735,6 +1738,15 @@ __metadata:
   peerDependencies:
     react: "*"
   checksum: 10/1e11cc2cb732fcf2ae229c09df26547ee97c817656ae850bd8e378e9880a50db81e35b49cdf78c9ea61cb162d42ad2c284ddc17dbdacaccc81e85499490b17d2
+  languageName: node
+  linkType: hard
+
+"@tamagui/use-debounce@npm:latest":
+  version: 1.125.31
+  resolution: "@tamagui/use-debounce@npm:1.125.31"
+  peerDependencies:
+    react: "*"
+  checksum: 10/21f07711023a84d25d91b6026d92d4a69f58379cccffb8283a7ac4d09fa83de49afc0c379b921ee1575c2fc9b0c02f6e9c5b62131f6b73d3b85f7e92714d4499
   languageName: node
   linkType: hard
 

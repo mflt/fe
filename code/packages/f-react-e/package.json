@@ -1,10 +1,11 @@
 {
   "name": "@mflt/f-react-e",
-  "version": "0.2503.14",
+  "version": "0.2503.19",
   "description": "",
   "//": [
     "Direct deps are not defined. Which may cause conflicts with older or newer versions.",
-    "React is not listed among deps, as it comes with tamagui"
+    "React is not listed among deps, as it comes with tamagui",
+    "Implement resizeObserver.disconnect/unobserve if needed adn as compatible with React dev mode and other circumstances"
   ],
   "#recent-changes": [],
   "#todos": [
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@mflt/_fe": "latest",
     "@shoelace-style/shoelace": "latest",
+    "@tamagui/use-debounce": "latest",
     "@types/node": "latest",
     "react": "^18.2.0 || ^19.0.0",
     "typescript": "beta",
@@ -55,6 +57,7 @@
   "peerDependencies": {
     "@mflt/_fe": "*",
     "@shoelace-style/shoelace": "*",
+    "@tamagui/use-debounce": "*",
     "react": "*",
     "use-debounce": "*"
   },

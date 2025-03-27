@@ -1,13 +1,13 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.2503.8",
+  "version": "0.2503.10",
   "description": "",
   "//": [
     "See f-react-e"
   ],
   "#recent-changes": [],
   "#todos": [
-    ""
+    "Narrow the tamagui imports"
   ],
   "type": "module",
   "module": "_/index.js",
