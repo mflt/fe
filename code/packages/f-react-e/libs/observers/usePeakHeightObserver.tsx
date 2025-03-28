@@ -9,10 +9,11 @@ import {
   type FeSetupRectResizeObserverwithCbReturnT, type FeSetupRectResizeObserverwithCbOptions
 } from './feSetupRectResizeObserverwithCb'
 
-export type WithMeasuredPeakHeightProps = React.PropsWithChildren & {
+export type WithMeasuredPeakHeightProps = {
   rollingPeakHeight?: React.RefObject<number>,
   setPeakHeight?: React.Dispatch<React.SetStateAction<number>>,
   debounceDelay?: Parameters<typeof useDebounce>[1],
+  // fSetStyle - ?
   // parentWidth?: number,
   // children?: any,
   // measuredElsRef: React.MutableRefObject<MeasurableEl[]>
@@ -27,7 +28,7 @@ export const usePeakHeightObserverOutlet = (  //
 ) => {  // @TODO Arrays of content only, similar width!
   // const { measuredElsRef: measuredElsRef } = props
   const {
-    parentelRef = null,
+    parentelRef: parentelRef_ = null,
     ..._options
   } = options || {}
   const measuredElsSet = useRef(new WeakSet<FeTrackedRectEl>()) // @TODO reset is not managed
@@ -42,9 +43,9 @@ export const usePeakHeightObserverOutlet = (  //
   }, [resizeObserversSetupResultsMap.current, measuredElsSet.current])
 
   useEffect(() => { // @TODO does not work (?)
-    if (!!parentelRef?.current /* || !rollingPeakHeight */)
-      parentelRef.current.style.height = String(rollingPeakHeight.current);
-  }, [rollingPeakHeight.current, parentelRef])
+    if (!!parentelRef_?.current /* || !rollingPeakHeight */)
+      parentelRef_.current.style.height = String(rollingPeakHeight.current);
+  }, [rollingPeakHeight.current, parentelRef_])
 
   const setupResizeObserverforEl = useCallback((
     el: FeTrackedRectEl,
@@ -87,11 +88,17 @@ export const usePeakHeightObserverOutlet = (  //
 
 
 export const WithMeasuredPeakHeight = (props:
-  WithMeasuredPeakHeightProps
+  & React.PropsWithChildren 
+  & WithMeasuredPeakHeightProps
 ) => { // @TODO test again
+  const {
+    children: slot,
+    debounceDelay = 0,
+    rollingPeakHeight: rollingPeakHeight_,
+    setPeakHeight: setPeakHeight_,
+  } = props
   const selfRef = useRef<HTMLDivElement|null>(null)
-  const [width, height] = useWidthAndHeightofRef(selfRef, {debounceDelay: props?.debounceDelay || 0})
-  // const [[width, height]] = useDebounce(_dims, props?.debounceDelay || 0)
+  const [width, height] = useWidthAndHeightofRef(selfRef, {debounceDelay})
   const [recordedWidth, setRecordedWidth] = useState<number>(0)
 
   useEffect(() => {
@@ -100,20 +107,20 @@ export const WithMeasuredPeakHeight = (props:
   }, [width])
 
   useEffect(() => {
-    if (!height || !width || !props.rollingPeakHeight) return // @TODO if checking rollingPeakHeight makes sense
-    if (recordedWidth != width || props.rollingPeakHeight.current < height!) {
-      props.rollingPeakHeight.current = height
-      props.setPeakHeight?.(height)
+    if (!height || !width || !rollingPeakHeight_) return // @TODO if checking rollingPeakHeight makes sense
+    if (recordedWidth != width || rollingPeakHeight_.current < height!) {
+      rollingPeakHeight_.current = height
+      setPeakHeight_?.(height)
     }
   }, [height, width, recordedWidth, props])
 
-  // @TODO add style option
+  // @TODO add style option, see in the outlet
   return <div ref={selfRef}>
-    {props.children}
+    {slot}
   </div>
 }
 
-export const useWidthAndHeightofRef = (
+export const useWidthAndHeightofRef = ( // @TODO of reffed
   ref: React.RefObject<FeTrackedRectEl|null>,
   options?: FeSetupRectResizeObserverwithCbOptions
 ) => {
@@ -127,12 +134,6 @@ export const useWidthAndHeightofRef = (
       },
       options
     )
-    // if (!ref?.current) return;
-    // const resizeObserver = new ResizeObserver(() => {
-    //   const { width, height } = ref?.current? ref.current.getBoundingClientRect() : {}
-    //   setDimensions([ Math.round(width||0), Math.round(height||0) ])
-    // });
-    // resizeObserver.observe(ref.current) // @TODO RN thing are not measured here
     return () => _setupRes?.disconnect()   // @TODO check if works
   }, [ref])
   return dims

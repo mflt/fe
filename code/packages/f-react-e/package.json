@@ -1,15 +1,15 @@
 {
   "name": "@mflt/f-react-e",
-  "version": "0.2503.19",
+  "version": "0.2503.20",
   "description": "",
   "//": [
     "Direct deps are not defined. Which may cause conflicts with older or newer versions.",
-    "React is not listed among deps, as it comes with tamagui",
-    "Implement resizeObserver.disconnect/unobserve if needed adn as compatible with React dev mode and other circumstances"
+    "React is not listed among deps, as it comes with tamagui"
   ],
   "#recent-changes": [],
   "#todos": [
-    ""
+    "WithMeasuredPeakHeight/setPeakHeight should not be necessary to implement in the user",
+    "Implement resizeObserver.disconnect/unobserve if needed adn as compatible with React dev mode and other circumstances"
   ],
   "type": "module",
   "module": "_/index.js",

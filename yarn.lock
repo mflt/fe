@@ -348,15 +348,15 @@ __metadata:
   linkType: soft
 
 "@mflt/f-react-e@npm:latest":
-  version: 0.2503.16
-  resolution: "@mflt/f-react-e@npm:0.2503.16"
+  version: 0.2503.20
+  resolution: "@mflt/f-react-e@npm:0.2503.20"
   peerDependencies:
     "@mflt/_fe": "*"
     "@shoelace-style/shoelace": "*"
     "@tamagui/use-debounce": "*"
     react: "*"
     use-debounce: "*"
-  checksum: 10/f07c48549404530d3766c7662bf0ac20147a302776802f135777a50588d243eb9034fec23b0628ea6e9e535f833b50010db83867f80b72d5849d5e606fff35c3
+  checksum: 10/9da51860e2b65ed458336829aa5ef506a38b243f9c97059433b7c928989368710e859f5e399b09fd107c1fac5be0d51c1b60e67ddbee2d23a192b55900594ef8
   languageName: node
   linkType: hard
 
