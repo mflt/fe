@@ -32,7 +32,9 @@ export const usePeakHeightObserverOutlet = (  //
     ..._options
   } = options || {}
   const measuredElsSet = useRef(new WeakSet<FeTrackedRectEl>()) // @TODO reset is not managed
-  const resizeObserversSetupResultsMap = useRef(new Map<FeTrackedRectEl, FeSetupRectResizeObserverwithCbReturnT>()) // @TODO reset is not managed
+  const resizeObserversSetupResultsMap = useRef(
+    new Map<FeTrackedRectEl, FeSetupRectResizeObserverwithCbReturnT>()
+  ) // @TODO reset is not managed
   const recordedDims = _options.recordedDims || useRef<FeTrackedRectDims>({width: 0, height: 0})
   const rollingRecordedWidth = useRef<number>(0)
   const rollingPeakHeight = useRef<number>(0)
@@ -43,9 +45,9 @@ export const usePeakHeightObserverOutlet = (  //
   }, [resizeObserversSetupResultsMap.current, measuredElsSet.current])
 
   useEffect(() => { // @TODO does not work (?)
-    if (!!parentelRef_?.current /* || !rollingPeakHeight */)
+    if (!!parentelRef_?.current?.style /* || !rollingPeakHeight */)
       parentelRef_.current.style.height = String(rollingPeakHeight.current);
-  }, [rollingPeakHeight.current, parentelRef_])
+  }, [rollingPeakHeight.current, parentelRef_?.current])
 
   const setupResizeObserverforEl = useCallback((
     el: FeTrackedRectEl,
@@ -76,11 +78,9 @@ export const usePeakHeightObserverOutlet = (  //
 
     if (!!_setupRes)  resizeObserversSetupResultsMap.current.set(el, _setupRes);
     return _setupRes
-  }, [resizeObserversSetupResultsMap.current, measuredElsSet.current])
+  }, [resizeObserversSetupResultsMap.current, measuredElsSet.current, rollingRecordedWidth])
 
-  const usePeakHeight = useCallback(
-    () => rollingPeakHeight.current
-  , [])
+  const usePeakHeight = () => rollingPeakHeight.current
   // debounceDelay is not needed, as rollingPeakHeight already changes by the clock
 
   return {usePeakHeight, setupResizeObserverforEl}
@@ -88,7 +88,7 @@ export const usePeakHeightObserverOutlet = (  //
 
 
 export const WithMeasuredPeakHeight = (props:
-  & React.PropsWithChildren 
+  & React.PropsWithChildren
   & WithMeasuredPeakHeightProps
 ) => { // @TODO test again
   const {
@@ -104,7 +104,7 @@ export const WithMeasuredPeakHeight = (props:
   useEffect(() => {
     if (width)
       setRecordedWidth(width)
-  }, [width])
+  }, [width, setRecordedWidth])
 
   useEffect(() => {
     if (!height || !width || !rollingPeakHeight_) return // @TODO if checking rollingPeakHeight makes sense
@@ -112,7 +112,7 @@ export const WithMeasuredPeakHeight = (props:
       rollingPeakHeight_.current = height
       setPeakHeight_?.(height)
     }
-  }, [height, width, recordedWidth, props])
+  }, [height, width, recordedWidth, rollingPeakHeight_?.current])
 
   // @TODO add style option, see in the outlet
   return <div ref={selfRef}>

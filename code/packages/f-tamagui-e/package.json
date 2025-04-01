@@ -1,13 +1,16 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.2503.12",
+  "version": "0.2503.13",
   "description": "",
   "//": [
     "See f-react-e"
   ],
   "#recent-changes": [],
   "#todos": [
-    "Narrow the tamagui imports"
+    "Narrow the tamagui imports",
+    "Structure tailwind coexistance",
+    "Bake internal tailwind classes into loading css or inline into style tags",
+    "In className and RN props conflicts the latter wins, while the former is the users' prop to override them all"
   ],
   "type": "module",
   "module": "_/index.js",
@@ -43,9 +46,13 @@
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
   },
+  "dependencies": {
+    "@preact/signals-react": "latest"
+  },
   "devDependencies": {
     "@mflt/_fe": "latest",
     "@mflt/f-react-e": "latest",
+    "@tamagui/lucide-icons": "latest",
     "@types/node": "latest",
     "embla-carousel-fade": "latest",
     "embla-carousel-react": "latest",
