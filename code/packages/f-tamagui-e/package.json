@@ -7,6 +7,7 @@
   ],
   "#recent-changes": [],
   "#todos": [
+    "head.title like h3 by default",
     "Narrow the tamagui imports",
     "Structure tailwind coexistance",
     "Bake internal tailwind classes into loading css or inline into style tags",

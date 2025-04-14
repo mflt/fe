@@ -321,14 +321,14 @@ export function FeTamaBlocksSlider <
               {
                 // @ts-ignore @TODO review typing
                 !!head?.title &&
-                <h3
+                <p
                   className={_styling.slideContentBlockTitleCls}
                 >
                   {
                     // @ts-ignore @TODO review typing
                     head.title
                   }
-                </h3>
+                </p>
               }
               <p className={_styling.slideContentBlockCls}>
                 {slideContentBlock}<br />
