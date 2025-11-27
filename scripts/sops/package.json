@@ -1,0 +1,14 @@
+
+{
+  "name": "@repo/scripts",
+  "version": "1000.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "with-sops-wrapper": "bun --env-file=../.env run ./sops-agekey.env-cmd-wrapper.ts",
+    "sops-age-env-cmd": "bun --env-file=../../.env run ./sops-agekey.env-cmd.ts",
+    "sops-init-agekey": "bun --env-file=../../.env run ./sops-agekey.init.ts",
+    "// linux": "SOPS_AGE_KEY_CMD='secret-tool lookup service sops account depjam.2510.solana-hackathon.age-key'",
+    "// macos": "SOPS_AGE_KEY_CMD='security find-generic-password -s sops -a depjam.2510.solana-hackathon.age-key -w'"
+  }
+}

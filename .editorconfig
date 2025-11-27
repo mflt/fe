@@ -1,21 +1,23 @@
 root = true
 
 [*]
+charset = utf-8
 end_of_line = lf
-trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
 insert_final_newline = true
 
+[*.{js,sh,md,json}]
+
+
 [*.{md,mdx,json,toml,yml,yaml,sh}]
-indent_style = space
 trim_trailing_whitespace = false
-indent_size = 2
-charset = utf-8
 
 [*.{ts,tsx,js,jsx}]
-indent_style = space
 trim_trailing_whitespace = true
-indent_size = 2
-charset = utf-8
+
+[*.{css}]
+trim_trailing_whitespace = true
 
 [CHANGELOG.md]
 indent_size = false

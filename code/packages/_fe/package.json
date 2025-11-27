@@ -1,6 +1,6 @@
 {
   "name": "@mflt/_fe",
-  "version": "0.8.15",
+  "version": "2511.0.16-beta",
   "description": "",
   "//": "",
   "#todos": [
@@ -43,15 +43,15 @@
   ],
   "scripts": {
     "build:ts": "bun tsc --build --pretty",
-    "publish:npmjs": "bun publish",
+    "publish:npmjs": "pnpm publish --access public --no-git-checks --tag latest",
     "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json _/; cp ../../../LICENSE ./",
     "npmjs:login": "bunx npm login",
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "typescript": "beta"
+    "@types/node": "catalog:base",
+    "typescript": "catalog:base"
   },
   "repository": {
     "type": "git",

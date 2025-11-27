@@ -1,0 +1,11 @@
+
+{
+  "name": "@repo/script-tests",
+  "version": "1000.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sops666": "echo BUUU",
+    "with-sops": "bun --env-file=../.env run ./sops-agekey.env-cmd-wrapper.ts"
+  }
+}

@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@types/node": "latest",
-    "typescript": "beta"
+    "typescript": "latest"
   },
   "repository": {
     "type": "git",

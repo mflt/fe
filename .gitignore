@@ -5,9 +5,6 @@
 
 docs/.vitepress/cache
 
-.yarn/*
-.turbo
-
 .ultra.cache.json
 tmp
 *.tsbuildinfo
@@ -28,7 +25,6 @@ node_modules
 # dev/build outputs
 .output
 .data
-.nuxt
 .nitro
 .next
 .cache
@@ -60,3 +56,23 @@ patches/*
 \[dist\]
 *.tsbuildinfo
 _/*
+
+# Profile
+.rspack-profile-*/
+
+# Temp
+.turbo/*
+!.turbo/preferences
+.cache
+%stash
+*.tmp
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
+
+#llm
+*.gguf
+ggufs

@@ -5,17 +5,54 @@
     "./code/shared.kits/**/*"
   ],
   "scripts": {
-    "repo:init": "yarn workspace @depjam.kits/xstd.brave initkit",
-    "wrong": "export NPM_TOKEN=$(cat ~/.npmrc | grep -o '_authToken=.*' | sed 's/_authToken=//g')",
+    "repo:i": "pnpm i",
+    "sops-wrapper": "pnpm -s --filter @repo/scripts run with-sops-wrapper",
+    "sops-age-env-cmd": "pnpm -s --filter @repo/scripts run sops-age-env-cmd",
+    "sops-init-agekey": "pnpm -s --filter @repo/scripts run sops-init-agekey",
+    "gh:auth": "gh auth login --scopes 'read:packages'",
+    "purge:node-modules-w-find": "find . -type d -name \"node_modules\" -prune -exec rm -rf '{}' +",
+    "%repo:init": "yarn workspace @depjam.kits/xstd.brave initkit",
+    "%wrong": "export NPM_TOKEN=$(cat ~/.npmrc | grep -o '_authToken=.*' | sed 's/_authToken=//g')",
     "std": "ts-standard"
   },
   "browserslist": [
     "defaults and fully supports es6-module",
     "maintained node versions"
   ],
+  "devDependencies": {
+    "turbo": "latest",
+    "ts-standard": "catalog:base",
+    "@clack/prompts": "catalog:base",
+    "arktype": "catalog:base",
+    "@types/bun": "catalog:base"
+  },
+  "pnpm": {
+    "overrides": {
+      "@rspack/core": "catalog:rstack",
+      "react": "catalog:react",
+      "react-dom": "catalog:react",
+      "@types/react": "catalog:react",
+      "@types/react-dom": "catalog:react",
+      "shared-node-kit@types/node": "^24.5.2"
+    }
+  },
   "trustedDependencies": [],
-  "packageManager": "yarn@4.5.3",
+  "packageManager": "pnpm@10.23.0",
   "engines": {
-    "node": ">= 23.0.0"
+    "node": ">=24",
+    "pnpm": "^10",
+    "bun": "please-use-pnpm",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "onFail": "warn"
+    }
   }
 }

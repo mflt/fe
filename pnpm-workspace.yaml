@@ -1,0 +1,67 @@
+packages:
+  - code/*
+  - code/packages/*
+  - code/shared.kits/*
+  - code/shared.lib/*
+  - code/shared.packages/ui/*
+  - code/shared.packages/utils/*
+  - vendor/*
+  - content/*
+  - scripts/*
+
+catalogs:
+
+  base:
+    "@clack/prompts": alpha
+    "@types/bun": latest
+    "@types/node": latest
+    "bun-types": latest
+    node: ^24.0.0
+    typescript: latest
+    "ts-standard": latest
+    arktype: latest
+    zod: latest
+    nanoid: ~5.1.5
+    nanostores: latest
+    "@tailwindcss/cli": latest
+    rimraf: latest
+    clsx: latest
+
+  rstack:
+    "@rspack/core": beta
+    "@rsbuild/core": beta
+    "html-rspack-plugin": latest
+    "@rsbuild/plugin-react": latest
+    "@rsbuild/plugin-type-check": latest
+    "@rsbuild/plugin-rem": latest
+    "@rsbuild/plugin-svgr": latest
+    "@rsbuild/plugin-sass": latest
+    "@rsbuild/plugin-toml": latest
+    "@rsbuild/plugin-mdx": latest
+    "rsbuild-plugin-tailwindcss": latest
+
+  wc:
+    lit: latest
+    "@lit/context": latest
+    "@lit/react": latest
+    "@lit/reactive-element": latest
+    "@lit-labs/preact-signals": latest
+    "@lit-labs/virtualizer": latest
+
+  app-unified:
+    "@tanstack/react-store": latest
+    "@tanstack/react-router": "^x.x.x"
+    "@tanstack/virtual-file-routes": latest
+    "@tanstack/router-plugin": latest
+    "@tanstack/router-cli": latest
+    "@tanstack/react-router-devtools": latest
+    "@douyinfe/semi-ui": "npm:@douyinfe/semi-ui-19@alpha"
+    "@douyinfe/semi-rspack-plugin": latest
+    hono: latest
+
+  react:
+    react: latest
+    react-dom: latest
+    "@types/react": latest
+    "@types/react-dom": latest
+    "@preact/signals-react": latest

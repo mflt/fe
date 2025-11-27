@@ -58,7 +58,7 @@
     "embla-carousel-fade": "latest",
     "embla-carousel-react": "latest",
     "tamagui": "latest",
-    "typescript": "beta",
+    "typescript": "latest",
     "use-debounce": "latest"
   },
   "peerDependencies": {

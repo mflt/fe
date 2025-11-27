@@ -1,0 +1,13 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "//#repo:i": {
+      "cache": false
+    },
+    "//#purge:node-modules-w-find": {
+      "cache": false
+    }
+  },
+  "dangerouslyDisablePackageManagerCheck": false
+}

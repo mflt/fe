@@ -2,7 +2,7 @@
   "name": "@depjam.kits/xstd.brave",
   "version": "1.2502.1",
   "scripts": {
-    "initkit": "yarn dlx jsr add @std/toml",
+    "initkit": "xoxyarn dlx jsr add @std/toml",
     "updkit": ""
   },
   "dependencies": {
@@ -17,7 +17,6 @@
   "devDependencies": {
     "@clack/prompts": "latest",
     "@types/bun": "latest",
-    "@types/glob": "latest",
     "@types/mustache": "latest",
     "@types/node": "latest",
     "browserslist": "^4",
@@ -30,7 +29,7 @@
     "ts-standard": "latest",
     "tslib": "latest",
     "type-fest": "latest",
-    "typescript": "beta",
+    "typescript": "latest",
     "typescript-plugin-toml": "latest"
   }
 }
