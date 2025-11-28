@@ -19,6 +19,6 @@ export function getNamedCssGridAreaasView (
   }
   return styled(View, {
     // display: 'contents',
-    '$platform-web': {gridArea: areaName}
+    '$platform-web': {gridArea: areaName} as any
   })
 }

@@ -469,9 +469,10 @@ export function FeTamaBlocksSlider <
     <YStack
       // 'wrapper'
       ref={selfRef}
-      my="$8" ai="center" jc="center" // bg='blue'
-      width='100%'
-      // height={_peakContentHeight}
+      marginVertical="$8"
+      alignItems="center"
+      justifyContent="center"
+      width="100%"
       style={{
       }}
     >
@@ -494,16 +495,21 @@ export function FeTamaBlocksSlider <
 
       <XStack className="scroll-horizontal no-scrollbar">
         <XStack
-          px="$0" // @TODO
-          space="$2"
-          width='100%'
-          ai='left'
+          paddingHorizontal="$0"
+          gap="$2"
+          width="100%"
+          alignItems="flex-start"
           style={{}}
         >
-          <PaginationGroup className={_styling.paginationGroupCls}>
+          <XGroup
+            paddingHorizontal="$0"
+            gap="$2"
+            width="100%"
+            alignItems="flex-start"
+          >
             {contentEntriesArray?.map(([head,], idx) => {
               const _head = _feIsObject(head) // @TODO duplicated code
-                ? (head as SlidesEntryHeadwPyl) || {}
+                ? (head as SlidesEntryHeadwPyl) || {label: ''}
                 : {label: head}
               return (
                 <XGroup.Item key={`handle-${String(_head.label)}${idx}`}>
@@ -514,7 +520,7 @@ export function FeTamaBlocksSlider <
                 </XGroup.Item>
               )
             })}
-          </PaginationGroup>
+          </XGroup>
         </XStack>
       </XStack>
     </YStack>
@@ -561,7 +567,7 @@ function _PaginationItem_Badge (props: FeTamaBlocksSliderPaginationItemProps) {
         borderRadius='$1'
         backgroundColor={isActive? 'black' : color}
         // px='0.5rem' py='0'  // @TODO overrides any classname
-        mx='0.25rem' mb='0.5rem'
+        marginHorizontal='0.25rem' marginBottom='0.5rem'
         // ai='center' jc='center'
         hoverStyle={{
           backgroundColor: 'red'  // @TODO into a prop
@@ -609,12 +615,12 @@ function _PaginationItem_Circle (props: CircleProps & FeTamaBlocksSliderPaginati
 
   return (
     <YStack
-      ai="center"
-      jc="center"
-      br="$10"
+      alignItems="center"
+      justifyContent="center"
+      borderRadius="$10"
       borderColor="transparent"
       borderWidth={0}
-      mx="$1"
+      marginHorizontal="$1"
       {...(isActive && {
         borderColor: '$color',
       })}
@@ -626,11 +632,11 @@ function _PaginationItem_Circle (props: CircleProps & FeTamaBlocksSliderPaginati
       {...rest}
     >
       <YStack
-        br="$10"
-        w={22}
-        h={22}
-        ai="center"
-        jc="center"
+        borderRadius="$10"
+        width={22}
+        height={22}
+        alignItems="center"
+        justifyContent="center"
         borderColor="transparent"
         cursor="pointer"
       >
