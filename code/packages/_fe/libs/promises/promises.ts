@@ -107,7 +107,7 @@ export class FeExecSignaling <
   RequestedValueT = true,
   ErrorReasonT = unknown
 > extends FePromise<ExecutionValueT,ErrorReasonT> {
-  protected _requested: PromiseWithResolvers<RequestedValueT>
+  protected _requested: FePromisewithResolvers<RequestedValueT>
   public get tillRequested () {
     return this._requested.promise as Promise<RequestedValueT>
   }
@@ -127,7 +127,8 @@ export class FeExecSignaling <
   public fail = (err?: FeExecSignalingError & ErrorReasonT) => this.reject(err)
   public constructor () {
     super()
-    this._requested = Promise.withResolvers<RequestedValueT>()
+    this._requested = Promise.withResolvers<RequestedValueT>() as FePromisewithResolvers<RequestedValueT> 
+    // ^ @TODO incorrect conversion, hack!!
   }
 }
 

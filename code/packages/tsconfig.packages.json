@@ -1,14 +1,34 @@
 {
   "extends": "../../tsconfig.common.json",
   "compilerOptions": {
-    "types": [],
     "rootDir": "${configDir}/libs",
     "outDir": "${configDir}/_/esm",
     "declarationDir": "${configDir}/_/dts",
     "tsBuildInfoFile": "${configDir}/_/mod.tsbuildinfo",
+
+    "target": "es2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["es2023", "DOM", "DOM.Iterable"],
+
+    "noEmit": false,
+    "erasableSyntaxOnly": false,
+    "declaration": true,
+    "declarationMap": true,
     "stripInternal": true,
+    "sourceMap": true,
+
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    // "allowSyntheticDefaultImports": true,
+    // "esModuleInterop": true,
+    // "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    // "isolatedModules": true
   },
   "include": [
     "${configDir}/libs/**/*"
   ],
+  "exclude": ["node_modules"]
 }

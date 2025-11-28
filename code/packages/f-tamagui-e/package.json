@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-tamagui-e",
-  "version": "0.2503.13",
+  "version": "0.2511.14-beta",
   "description": "",
   "//": [
     "See f-react-e"
@@ -40,26 +40,29 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "build:ts": "bun tsc --build --pretty",
-    "publish:npmjs": "bun publish",
+    "build:ts": "pnpm tsc --build --pretty",
+    "publish:npmjs": "pnpm publish --access public --no-git-checks --tag latest",
     "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json _/; cp ../../../LICENSE ./",
+    "prep:fe-deps-up": "pnpm up @mflt/f-react-e",
     "npmjs:login": "bunx npm login",
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
   },
   "dependencies": {
-    "@preact/signals-react": "latest"
+    "@preact/signals-react": "catalog:react"
   },
   "devDependencies": {
     "@mflt/_fe": "latest",
     "@mflt/f-react-e": "latest",
     "@tamagui/lucide-icons": "latest",
-    "@types/node": "latest",
+    "@types/node": "catalog:base",
     "embla-carousel-fade": "latest",
     "embla-carousel-react": "latest",
     "tamagui": "latest",
-    "typescript": "latest",
-    "use-debounce": "latest"
+    "@tamagui/core": "latest",
+    "typescript": "catalog:base",
+    "use-debounce": "catalog:react",
+    "@tamagui/react-native-web-lite": "latest"
   },
   "peerDependencies": {
     "@mflt/_fe": "*",
@@ -68,7 +71,9 @@
     "embla-carousel-react": "*",
     "react": "*",
     "tamagui": "*",
-    "use-debounce": "*"
+    "@tamagui/core": "*",
+    "use-debounce": "*",
+    "@tamagui/react-native-web-lite": "*"
   },
   "repository": {
     "type": "git",

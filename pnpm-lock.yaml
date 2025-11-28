@@ -24,6 +24,13 @@ catalogs:
     typescript:
       specifier: latest
       version: 5.9.3
+  react:
+    '@preact/signals-react':
+      specifier: latest
+      version: 3.6.1
+    use-debounce:
+      specifier: latest
+      version: 10.0.6
 
 overrides:
   '@rspack/core': beta
@@ -31,7 +38,6 @@ overrides:
   react-dom: latest
   '@types/react': latest
   '@types/react-dom': latest
-  shared-node-kit@types/node: ^24.5.2
 
 importers:
 
@@ -70,7 +76,7 @@ importers:
     devDependencies:
       '@mflt/_fe':
         specifier: latest
-        version: 0.8.15
+        version: 0.2511.18-beta
       '@shoelace-style/shoelace':
         specifier: latest
         version: 2.20.1(@floating-ui/utils@0.2.10)(@types/react@19.2.7)
@@ -78,19 +84,19 @@ importers:
         specifier: latest
         version: 1.138.5(react@19.2.0)
       '@types/node':
-        specifier: latest
+        specifier: catalog:base
         version: 24.10.1
       typescript:
-        specifier: latest
+        specifier: catalog:base
         version: 5.9.3
       use-debounce:
-        specifier: latest
+        specifier: catalog:react
         version: 10.0.6(react@19.2.0)
 
   code/packages/f-tamagui-e:
     dependencies:
       '@preact/signals-react':
-        specifier: latest
+        specifier: catalog:react
         version: 3.6.1(react@19.2.0)
       react:
         specifier: latest
@@ -98,15 +104,21 @@ importers:
     devDependencies:
       '@mflt/_fe':
         specifier: latest
-        version: 0.8.15
+        version: 0.2511.18-beta
       '@mflt/f-react-e':
         specifier: latest
-        version: 0.2503.21(@mflt/_fe@0.8.15)(@shoelace-style/shoelace@2.20.1(@floating-ui/utils@0.2.10)(@types/react@19.2.7))(@tamagui/use-debounce@1.138.5(react@19.2.0))(react@19.2.0)(use-debounce@10.0.6(react@19.2.0))
+        version: 0.2511.22-beta(@mflt/_fe@0.2511.18-beta)(@shoelace-style/shoelace@2.20.1(@floating-ui/utils@0.2.10)(@types/react@19.2.7))(@tamagui/use-debounce@1.138.5(react@19.2.0))(react@19.2.0)(use-debounce@10.0.6(react@19.2.0))
+      '@tamagui/core':
+        specifier: latest
+        version: 1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
       '@tamagui/lucide-icons':
         specifier: latest
         version: 1.138.5(react-dom@19.2.0(react@19.2.0))(react-native-svg@15.15.0(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
-      '@types/node':
+      '@tamagui/react-native-web-lite':
         specifier: latest
+        version: 1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
+      '@types/node':
+        specifier: catalog:base
         version: 24.10.1
       embla-carousel-fade:
         specifier: latest
@@ -118,10 +130,10 @@ importers:
         specifier: latest
         version: 1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
       typescript:
-        specifier: latest
+        specifier: catalog:base
         version: 5.9.3
       use-debounce:
-        specifier: latest
+        specifier: catalog:react
         version: 10.0.6(react@19.2.0)
 
   code/packages/fe3:
@@ -205,23 +217,20 @@ importers:
     dependencies:
       '@mflt/_fe':
         specifier: latest
-        version: 0.8.15
+        version: 0.2511.18-beta
     devDependencies:
       '@types/node':
-        specifier: latest
+        specifier: catalog:base
         version: 24.10.1
       typescript:
-        specifier: latest
+        specifier: catalog:base
         version: 5.9.3
 
   code/shared.kits/xstd:
     dependencies:
-      '@std/toml':
-        specifier: npm:@jsr/std__toml@^1.0.2
-        version: '@jsr/std__toml@1.0.11'
       effect:
         specifier: ^3
-        version: 3.19.6
+        version: 3.19.8
       fast-safe-stringify:
         specifier: ^2
         version: 2.1.1
@@ -262,9 +271,6 @@ importers:
       bun-types:
         specifier: latest
         version: 1.3.3
-      jsr:
-        specifier: latest
-        version: 0.13.5
       picocolors:
         specifier: latest
         version: 1.1.1
@@ -590,12 +596,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@jsr/std__collections@1.1.3':
-    resolution: {integrity: sha512-jGG6mv3IjOyxm6PyT1YVbLyAlZL+Gow6LOpBw+84qb1nkdJY0+t6bi7ICEqAwUz87cNjBS0P+yZQ5HHclJhsfw==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.1.3.tgz}
-
-  '@jsr/std__toml@1.0.11':
-    resolution: {integrity: sha512-+LZAizoPAPwMDmRZr86/xPrbO8E0Oq0BJ70mr1fNMobJ/6X6v15Jk16ZClFGukWgzBMd8ggiMWnzp24+N3VNZg==, tarball: https://npm.jsr.io/~/11/@jsr/std__toml/1.0.11.tgz}
-
   '@lit-labs/observers@2.0.2':
     resolution: {integrity: sha512-eZb5+W9Cb0e/Y5m1DNxBSGTvGB2TAVTGMnTxL/IzFhPQEcZIAHewW1eVBhN8W07A5tirRaAmmF6fGL1V20p3gQ==}
 
@@ -622,11 +622,11 @@ packages:
   '@lit/reactive-element@2.1.1':
     resolution: {integrity: sha512-N+dm5PAYdQ8e6UlywyyrgI2t++wFGXfHx+dSJ1oBrg6FAxUj40jId++EaRm80MKX5JnlH1sBsyZ5h0bcZKemCg==}
 
-  '@mflt/_fe@0.8.15':
-    resolution: {integrity: sha512-BEe/oTQeUENPG24TfaOCQ8fJfiOqbdGfk4csdogB3jH/q6U9D1pghfrDwjyKa0FmlTu+mg3b6asHGoimBPxFBg==}
+  '@mflt/_fe@0.2511.18-beta':
+    resolution: {integrity: sha512-tQobzohxQEyJ1Gl4ShvcFj/psZXAIWypie8zzlvrvUd6gPvnFiRUbN29VYHI/lbFfXboztRleB6m96gAiEOYeA==}
 
-  '@mflt/f-react-e@0.2503.21':
-    resolution: {integrity: sha512-TSt/LEL9c6k6DO/q41+DYvJiiHhSO+rIIA2yOQUmnbq+rJF/ml4egp1clxzfc7gqTmq575FZonAFao6pG9LOpw==}
+  '@mflt/f-react-e@0.2511.22-beta':
+    resolution: {integrity: sha512-973FBlhOEQhEkvcbkGXS0dQIxXz6kyxrWzffCs9pMIzn9egIlMIUMzdKZsOgsHMdMEBCUZAecwx5oCnbGFsdLA==}
     peerDependencies:
       '@mflt/_fe': '*'
       '@shoelace-style/shoelace': '*'
@@ -1110,6 +1110,18 @@ packages:
     resolution: {integrity: sha512-pJn7o7sQiT+efjCenQjVWJqS0+OXNxyQcAtm2IL9URvv1TZHlEBokJapU429i2OTPSoIcLZPp3DdaBkrn2Lp2g==}
     peerDependencies:
       react: '*'
+
+  '@tamagui/react-native-web-internals@1.138.5':
+    resolution: {integrity: sha512-GnNbc+VmkBhnjASzAoNMqL8LFpgaxZ29aNLp9YJfm0cu8ScwVwPYhs8lHO5Y/iQcMD4DXi/IyiJtDOi9/CTeeg==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+
+  '@tamagui/react-native-web-lite@1.138.5':
+    resolution: {integrity: sha512-Q/nMxQCgll/EBe2jvTR1fyi6/7TWeJISjIjLDC2Zeq433WqyQymFIp837f4W6DLTp038u9UtFWEu42ILNSyplg==}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
 
   '@tamagui/remove-scroll@1.138.5':
     resolution: {integrity: sha512-O5AF3X+Dv1ufGmH4TlzkVlqIdFXXWF9UJ8J1yKUdko35VrJ2wNpmZcOgmsT6xQUaywzy3xquZkwMbxyDyj/vTQ==}
@@ -1848,8 +1860,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  effect@3.19.6:
-    resolution: {integrity: sha512-Eh1E/CI+xCAcMSDC5DtyE29yWJINC0zwBbwHappQPorjKyS69rCA8qzpsHpfhKnPDYgxdg8zkknii8mZ+6YMQA==}
+  effect@3.19.8:
+    resolution: {integrity: sha512-OmLw8EfH02vdmyU2fO4uY9He/wepwKI5E/JNpE2pseaWWUbaYOK9UlxIiKP20ZEqQr+S/jSqRDGmpiqD/2DeCQ==}
 
   electron-to-chromium@1.5.262:
     resolution: {integrity: sha512-NlAsMteRHek05jRUxUR0a5jpjYq9ykk6+kO0yRaMi5moe7u0fVIOeQ3Y30A8dIiWFBNUoQGi1ljb1i5VtS9WQQ==}
@@ -2562,10 +2574,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  jsr@0.13.5:
-    resolution: {integrity: sha512-qQP20ZcG28pYes7bCq3uuvixl1TL1EpJzwLPfoQadSyWk9j2AID66qhW8+aXpRDRFDvDkXFnONsSRhpnnQAupg==}
-    hasBin: true
-
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
@@ -2652,6 +2660,9 @@ packages:
 
   memoize-one@5.2.1:
     resolution: {integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==}
+
+  memoize-one@6.0.0:
+    resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -2797,10 +2808,6 @@ packages:
 
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
-
-  node-stream-zip@1.15.0:
-    resolution: {integrity: sha512-LN4fydt9TqhZhThkZIVQnF9cwjU3qmUH9h78Mx/K7d3VvfRqqwthLwJEUOEL0QPZ0XQmNN7be5Ggit5+4dq3Bw==}
-    engines: {node: '>=0.12.0'}
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -3135,10 +3142,6 @@ packages:
 
   scheduler@0.27.0:
     resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
-
-  semiver@1.1.0:
-    resolution: {integrity: sha512-QNI2ChmuioGC1/xjyYwyZYADILWyW6AmS1UH6gDj/SFUUUS4MBAWs/7mxnkRPc/F4iHezDP+O8t0dO8WHiEOdg==}
-    engines: {node: '>=6'}
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -3976,12 +3979,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@jsr/std__collections@1.1.3': {}
-
-  '@jsr/std__toml@1.0.11':
-    dependencies:
-      '@jsr/std__collections': 1.1.3
-
   '@lit-labs/observers@2.0.2':
     dependencies:
       '@lit/reactive-element': 2.1.1
@@ -4016,11 +4013,11 @@ snapshots:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.4.0
 
-  '@mflt/_fe@0.8.15': {}
+  '@mflt/_fe@0.2511.18-beta': {}
 
-  '@mflt/f-react-e@0.2503.21(@mflt/_fe@0.8.15)(@shoelace-style/shoelace@2.20.1(@floating-ui/utils@0.2.10)(@types/react@19.2.7))(@tamagui/use-debounce@1.138.5(react@19.2.0))(react@19.2.0)(use-debounce@10.0.6(react@19.2.0))':
+  '@mflt/f-react-e@0.2511.22-beta(@mflt/_fe@0.2511.18-beta)(@shoelace-style/shoelace@2.20.1(@floating-ui/utils@0.2.10)(@types/react@19.2.7))(@tamagui/use-debounce@1.138.5(react@19.2.0))(react@19.2.0)(use-debounce@10.0.6(react@19.2.0))':
     dependencies:
-      '@mflt/_fe': 0.8.15
+      '@mflt/_fe': 0.2511.18-beta
       '@shoelace-style/shoelace': 2.20.1(@floating-ui/utils@0.2.10)(@types/react@19.2.7)
       '@tamagui/use-debounce': 1.138.5(react@19.2.0)
       react: 19.2.0
@@ -4849,6 +4846,33 @@ snapshots:
   '@tamagui/react-native-use-responder-events@1.138.5(react@19.2.0)':
     dependencies:
       react: 19.2.0
+
+  '@tamagui/react-native-web-internals@1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@tamagui/normalize-css-color': 1.138.5
+      '@tamagui/react-native-use-pressable': 1.138.5(react@19.2.0)
+      '@tamagui/react-native-use-responder-events': 1.138.5(react@19.2.0)
+      '@tamagui/simple-hash': 1.138.5
+      '@tamagui/use-element-layout': 1.138.5(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
+      '@tamagui/web': 1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+    transitivePeerDependencies:
+      - react-native
+
+  '@tamagui/react-native-web-lite@1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@tamagui/normalize-css-color': 1.138.5
+      '@tamagui/react-native-use-pressable': 1.138.5(react@19.2.0)
+      '@tamagui/react-native-use-responder-events': 1.138.5(react@19.2.0)
+      '@tamagui/react-native-web-internals': 1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
+      '@tamagui/web': 1.138.5(react-dom@19.2.0(react@19.2.0))(react-native@0.82.1(@babel/core@7.28.5)(@types/react@19.2.7)(react@19.2.0))(react@19.2.0)
+      invariant: 2.2.4
+      memoize-one: 6.0.0
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+    transitivePeerDependencies:
+      - react-native
 
   '@tamagui/remove-scroll@1.138.5(react@19.2.0)':
     dependencies:
@@ -5890,7 +5914,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  effect@3.19.6:
+  effect@3.19.8:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
@@ -6763,11 +6787,6 @@ snapshots:
 
   json5@2.2.3: {}
 
-  jsr@0.13.5:
-    dependencies:
-      node-stream-zip: 1.15.0
-      semiver: 1.1.0
-
   jsx-ast-utils@3.3.5:
     dependencies:
       array-includes: 3.1.9
@@ -6865,6 +6884,8 @@ snapshots:
   mdn-data@2.0.14: {}
 
   memoize-one@5.2.1: {}
+
+  memoize-one@6.0.0: {}
 
   merge-stream@2.0.0: {}
 
@@ -7095,8 +7116,6 @@ snapshots:
   node-int64@0.4.0: {}
 
   node-releases@2.0.27: {}
-
-  node-stream-zip@1.15.0: {}
 
   normalize-path@3.0.0: {}
 
@@ -7468,8 +7487,6 @@ snapshots:
   scheduler@0.26.0: {}
 
   scheduler@0.27.0: {}
-
-  semiver@1.1.0: {}
 
   semver@6.3.1: {}
 

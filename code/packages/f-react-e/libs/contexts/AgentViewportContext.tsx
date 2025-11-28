@@ -46,7 +46,7 @@ const getWindowInnerDims = (
 export function AgentViewportContextProvider (props: 
   & React.PropsWithChildren 
   & AgentViewportContextProviderProps
-) {
+): React.ReactElement {
   const {
     children: slot,
     skipSetup: skipSetup_ = false,

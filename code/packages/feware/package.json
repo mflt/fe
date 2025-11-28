@@ -1,6 +1,6 @@
 {
   "name": "@mflt/feware",
-  "version": "0.8.20",
+  "version": "0.2511.21-beta",
   "description": "",
   "//": "",
   "#recent-changes": [
@@ -32,9 +32,10 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "build:ts": "bun tsc --build --pretty",
-    "publish:npmjs": "bun publish",
+    "build:ts": "pnpm tsc --build --pretty",
+    "publish:npmjs": "pnpm publish --access public --no-git-checks --tag latest",
     "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json _/; cp ../../../LICENSE ./",
+    "prep:fe-deps-up": "pnpm up @mflt/_fe",
     "npmjs:login": "bunx npm login",
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
@@ -43,8 +44,8 @@
     "@mflt/_fe": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "typescript": "latest"
+    "@types/node": "catalog:base",
+    "typescript": "catalog:base"
   },
   "repository": {
     "type": "git",

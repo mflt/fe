@@ -57,7 +57,7 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "build:ts": "bun tsc --build --pretty",
+    "build:ts": "pnpm tsc --build --pretty",
     "dev:link-deps": "bun link fe3 festrand",
     "dev:unlink-deps": "bun unlink fe3 festrand",
     "dev:publish-link": "bun link",

@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-react-e",
-  "version": "0.2503.21",
+  "version": "0.2511.22-beta",
   "description": "",
   "//": [
     "Direct deps are not defined. Which may cause conflicts with older or newer versions.",
@@ -38,9 +38,10 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "build:ts": "bun tsc --build --pretty",
-    "publish:npmjs": "bun publish",
+    "build:ts": "pnpm tsc --build --pretty",
+    "publish:npmjs": "pnpm publish --access public --no-git-checks --tag latest",
     "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json _/; cp ../../../LICENSE ./",
+    "prep:fe-deps-up": "pnpm up @mflt/_fe",
     "npmjs:login": "bunx npm login",
     "dev:publish-link": "bun link",
     "dev:publish-unlink": "bun unlink"
@@ -49,10 +50,10 @@
     "@mflt/_fe": "latest",
     "@shoelace-style/shoelace": "latest",
     "@tamagui/use-debounce": "latest",
-    "@types/node": "latest",
-    "react": "^18.2.0 || ^19.0.0",
-    "typescript": "latest",
-    "use-debounce": "latest"
+    "@types/node": "catalog:base",
+    "react": "catalog:react",
+    "typescript": "catalog:base",
+    "use-debounce": "catalog:react"
   },
   "peerDependencies": {
     "@mflt/_fe": "*",

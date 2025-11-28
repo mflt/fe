@@ -65,3 +65,4 @@ catalogs:
     "@types/react": latest
     "@types/react-dom": latest
     "@preact/signals-react": latest
+    "use-debounce": latest

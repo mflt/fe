@@ -1,8 +1,7 @@
 {
   "name": "@mflt/fe",
   "workspaces": [
-    "./code/packages/*",
-    "./code/shared.kits/**/*"
+    "./code/packages/*"
   ],
   "scripts": {
     "repo:i": "pnpm i",
@@ -11,8 +10,7 @@
     "sops-init-agekey": "pnpm -s --filter @repo/scripts run sops-init-agekey",
     "gh:auth": "gh auth login --scopes 'read:packages'",
     "purge:node-modules-w-find": "find . -type d -name \"node_modules\" -prune -exec rm -rf '{}' +",
-    "%repo:init": "yarn workspace @depjam.kits/xstd.brave initkit",
-    "%wrong": "export NPM_TOKEN=$(cat ~/.npmrc | grep -o '_authToken=.*' | sed 's/_authToken=//g')",
+    "purge:pnpm-caches": "pnpm store prune && pnpm install --frozen-lockfile",
     "std": "ts-standard"
   },
   "browserslist": [
@@ -32,12 +30,11 @@
       "react": "catalog:react",
       "react-dom": "catalog:react",
       "@types/react": "catalog:react",
-      "@types/react-dom": "catalog:react",
-      "shared-node-kit@types/node": "^24.5.2"
+      "@types/react-dom": "catalog:react"
     }
   },
   "trustedDependencies": [],
-  "packageManager": "pnpm@10.23.0",
+  "packageManager": "pnpm@10.24.0",
   "engines": {
     "node": ">=24",
     "pnpm": "^10",

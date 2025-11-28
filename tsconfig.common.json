@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
-    "lib": [ "ESNext", "DOM" ],
+    // "module": "esnext",
+    // "target": "esnext",
+    // "lib": [ "ESNext", "DOM" ],
     /* Type checking */
-    "strict": true, // * set by tsc itself
+    // "strict": true, // * set by tsc itself
     /* Comleteness */
-    "skipLibCheck": true, // * set by tsc itself
+    // "skipLibCheck": true, // * set by tsc itself
     /* Bundler mode */
-    "moduleResolution": "bundler",
-    "moduleDetection": "force", // * suggested by bun
+    // "moduleResolution": "bundler",
+    // "moduleDetection": "force", // * suggested by bun
     /* Emit */
-    "declaration": true,
-    "declarationMap": true,
+    // "declaration": true,
+    // "declarationMap": true,
     /* Interop constraints */
     // "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true, // * set by tsc itself

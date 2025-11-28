@@ -7,7 +7,7 @@ import {
   feSetupRectResizeObserverwithCb,
   type FeTrackedRectEl, type FeTrackedRectDims,
   type FeSetupRectResizeObserverwithCbReturnT, type FeSetupRectResizeObserverwithCbOptions
-} from './feSetupRectResizeObserverwithCb'
+} from './feSetupRectResizeObserverwithCb.js'
 
 export type WithMeasuredPeakHeightProps = {
   rollingPeakHeight?: React.RefObject<number>,

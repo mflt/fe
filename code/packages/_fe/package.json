@@ -1,10 +1,10 @@
 {
   "name": "@mflt/_fe",
-  "version": "2511.0.16-beta",
+  "version": "0.2511.18-beta",
   "description": "",
   "//": "",
   "#todos": [
-    ""
+    "FeExecSignaling hack"
   ],
   "type": "module",
   "module": "_/index.js",
@@ -42,7 +42,7 @@
     "tsconfig.json"
   ],
   "scripts": {
-    "build:ts": "bun tsc --build --pretty",
+    "build:ts": "pnpm tsc --build --pretty",
     "publish:npmjs": "pnpm publish --access public --no-git-checks --tag latest",
     "publish:preps": "cp ../tsconfig.packages.json ../../../tsconfig.common.json _/; cp ../../../LICENSE ./",
     "npmjs:login": "bunx npm login",

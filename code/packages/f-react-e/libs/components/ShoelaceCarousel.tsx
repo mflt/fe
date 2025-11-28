@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react'
 // import type { FeTrackedRectEl} from '../observers/feSetupRectResizeObserverwithCb'
-import { WithMeasuredPeakHeight, type WithMeasuredPeakHeightProps  } from '../observers/usePeakHeightObserver'
+import { WithMeasuredPeakHeight, type WithMeasuredPeakHeightProps  } from '../observers/usePeakHeightObserver.js'
 import type {
   SlCarousel as FeShoelaceCarouselEl,
   SlCarouselItem as FeShoelaceCarouselItem,
