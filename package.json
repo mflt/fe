@@ -18,7 +18,6 @@
     "maintained node versions"
   ],
   "devDependencies": {
-    "turbo": "latest",
     "ts-standard": "catalog:base",
     "@clack/prompts": "catalog:base",
     "arktype": "catalog:base",
