@@ -1,6 +1,6 @@
 {
   "name": "@mflt/feware",
-  "version": "0.2511.21-beta",
+  "version": "0.2511.22-beta",
   "description": "",
   "//": "",
   "#recent-changes": [
@@ -41,7 +41,8 @@
     "dev:publish-unlink": "bun unlink"
   },
   "dependencies": {
-    "@mflt/_fe": "latest"
+    "@mflt/_fe": "latest",
+    "mergician": "catalog:repo"
   },
   "devDependencies": {
     "@types/node": "catalog:base",

@@ -66,3 +66,6 @@ catalogs:
     "@types/react-dom": latest
     "@preact/signals-react": latest
     "use-debounce": latest
+
+  repo:
+    mergician: latest

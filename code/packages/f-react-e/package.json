@@ -1,6 +1,6 @@
 {
   "name": "@mflt/f-react-e",
-  "version": "0.2511.22-beta",
+  "version": "0.2511.24-beta",
   "description": "",
   "//": [
     "Direct deps are not defined. Which may cause conflicts with older or newer versions.",

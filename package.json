@@ -9,6 +9,7 @@
     "sops-age-env-cmd": "pnpm -s --filter @repo/scripts run sops-age-env-cmd",
     "sops-init-agekey": "pnpm -s --filter @repo/scripts run sops-init-agekey",
     "gh:auth": "gh auth login --scopes 'read:packages'",
+    "clean:deps": "rm pnpm-lock.yaml; pnpm store prune; pnpm run purge:deps-cache",
     "purge:node-modules-w-find": "find . -type d -name \"node_modules\" -prune -exec rm -rf '{}' +",
     "purge:pnpm-caches": "pnpm store prune && pnpm install --frozen-lockfile",
     "std": "ts-standard"
