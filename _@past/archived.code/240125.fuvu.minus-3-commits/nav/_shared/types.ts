@@ -52,32 +52,21 @@ export type FuComponentsUnitProps_nonMangledKey = string|undefined; // easier to
 export type FuComponentsUnitProps_Base = {
   // these are singular values, in case the component instance is reused in multiple subspaces a different mechanism should be in place, like assign a weakmap
   componentName?: string,
-  getView: ()=> HTMLElement, // in case of Single will return itself, in case of Fragment - its view part; assumed to be a working property
   nonMangledKey?: FuComponentsUnitProps_nonMangledKey,
-  position?: FuViewLocation['position'],  // aka the ParentNode which is the current one or the most recent one; may be a result of manipulations which diverge the position gained from the location field dispositions
-  isBuffered?: boolean, // the component's view/element is parked in the buffer
-  computableLocation?: FuViewLocation,  // computable parent node to attach to by design; the recent/current position field value may result from this
+  location?: FuViewLocation,  // parent node to attach to
   // lastParentLocation?: FuComponentsSharedProps_initialParentLocation,
 };
-// logic of finding a position (parent) to attach to: a) valid position; b) valid computableLocation result; c) first valid fallback in computableLocation; d) a fallback provided by subspace
 
-export type FuSingleTypes <
-  UnitFieldShape extends FuComponentsUnitProps_Base = FuComponentsUnitProps_Base
-> =
+export type FuSingleTypes =
   & (
     | FeElementBaseWc
     | SpectrumElement
     | HTMLElement
   )
   & {
-    [$fu]?: UnitFieldShape, // can be undefined unlike in case of FuAnyComponent
+    [$fu]?: FuComponentsUnitProps_Base,
   }
 ; // @TODO Component types
-export type FuSingleTypes_withUnitField < // singles in subspaces are assigned a unit field by default
-  UnitFieldShape extends FuComponentsUnitProps_Base = FuComponentsUnitProps_Base
-> = FuSingleTypes & {
-  [$fu]: UnitFieldShape,  // defined
-}
 
 export type FuSinglesTypemap_Assert = Record<string, FuSingleTypes>;
 export type FuAllResTypemap_Assert = Record<string, FuFeedTypes|FuViewTypes|FuSingleTypes>;

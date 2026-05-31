@@ -8,32 +8,19 @@ import {
   type FuEResourcekindsKeys
 } from './_shared/strings.js';
 import type {
-  FuFeedTypes, FuViewTypes, FuSingleTypes_withUnitField, FuFeedResourceidLike, FuViewResourceidLike,
+  FuFeedTypes, FuViewTypes, FuSingleTypes, FuFeedResourceidLike, FuViewResourceidLike,
   FuResourceidsforOneFragment,
 } from './_shared/types.js';
 import {
-  fuComponentIdfromName, fuResourceIdfromComponentId, fuSetPropinUnitField, fuToViewLocation,
+  fuComponentIdfromName, fuResourceIdfromComponentId, fuToViewLocation,
 } from './_shared/helpers.js';
 import type { FuAnchorfromOneFragmentPerspective, } from './anchor.js';
 
 
 // export type FuFragmentInflateviewSetFeed<View extends FuViewTypes> = (that: View) => void;
 
-export type _FuFragmentAny <
-  UnitFieldShape extends FuComponentsUnitProps_Base = FuComponentsUnitProps_Base
-> =
-  Omit<FuFragment<FuFeedTypes,FuViewTypes>,'nav'> // @TODO omitting nav could be done better
-  & {
-    [$fu]: UnitFieldShape
-  }
-;
-
-export type FuAnyComponent <
-  UnitFieldShape extends FuComponentsUnitProps_Base = FuComponentsUnitProps_Base
-> =
-  | _FuFragmentAny<UnitFieldShape>
-  | FuSingleTypes_withUnitField<UnitFieldShape> // makes unit field defined (possibly undefined in a single)
-;
+export type _FuFragmentAny = Omit<FuFragment<FuFeedTypes,FuViewTypes>,'nav'>; // @TODO omitting nav could be done better
+export type FuAnyComponent = _FuFragmentAny|FuSingleTypes;
 
 export type FuFeedTofFragment <Fg extends _FuFragmentAny> = Pick<Fg,FuEResourcekindsKeys.Feed>[FuEResourcekindsKeys.Feed];
 export type FuViewTofFragment <Fg extends _FuFragmentAny> = Pick<Fg,FuEResourcekindsKeys.View>[FuEResourcekindsKeys.View];
@@ -98,9 +85,7 @@ export abstract class FuFragment <
 {
   // readonly #fragmentName!: string;  // like Function.name, local variant, keyString or 'foo-bar'; also useful for persistent storage
 
-  public [$fu] = {
-    getView: ()=> this.view,
-  } as FuComponentsUnitProps_Base; // Unit field, compatibility with Singles, where this is assigned by the sub's decorator or its constructor
+  public [$fu] = {} as FuComponentsUnitProps_Base; // Unit field, compatibility with Singles, where this is assigned by the sub's decorator or its constructor
 
   public get fragmentName () { return this[$fu].componentName || FuEStrings.Undefined; }
   readonly #subspaceId!: string;  // fq/lr assumed
@@ -173,9 +158,9 @@ export abstract class FuFragment <
     subspaceId: string,  // ComponentsRecordLrIdString aka Fq aka spaceid in spaceid.foo already added; is not private as mutating spaceid might be a case, unlike anchor
     // space does not exist necessarily, so we expect anchor which we expect to exist and not change as a pillar of the fu env
     private a: FuAnchorfromOneFragmentPerspective<Feed,View>, // @TODO let it be a partial of the normal anchor
-    locationOrPositionOrSelector?: Parameters<typeof fuToViewLocation>[0], // Parent node to attach to
+    initialLocationOrSelector?: Parameters<typeof fuToViewLocation>[0], // Parent node to attach to
   ) {
-    fuSetPropinUnitField<'componentName'>(this,'componentName',fragmentName); // @TODO might be a maintained duplicate
+    this[$fu].componentName = fragmentName; // @TODO
     if (this.fragmentName===FuEStrings.Undefined) {
       // console.log @TODO
     }
@@ -190,6 +175,6 @@ export abstract class FuFragment <
       // console.log @TODO
     }*/
     // @TODO register the Fragment in a
-    fuSetPropinUnitField<'computableLocation'>(this,'computableLocation',fuToViewLocation(locationOrPositionOrSelector));  // can also be set by the sub's decorator
+    this[$fu].location = fuToViewLocation(initialLocationOrSelector);  // can also be set by the sub's decorator
   }
 }

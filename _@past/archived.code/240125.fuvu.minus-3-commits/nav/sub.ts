@@ -6,11 +6,11 @@ import {
   $fu, $actions, $state,
 } from './_shared/strings.js';
 import type {
-  FuSingleTypes_withUnitField, FuComponentsUnitProps_nonMangledKey, FuComponentsUnitProps_Base,
+  FuSingleTypes, FuComponentsUnitProps_nonMangledKey, FuViewLocation,
 } from './_shared/types.js';
 import type { FuShapeofComponentsRec, _TComponentsonlyRecord, } from './_shared/record.types.js';
 import {
-  fuComponentIdfromName, fuHasUnitField, fuAssignUnitField, fuToViewLocation, fuSetPropinUnitField,
+  fuComponentIdfromName, fuHasUnitField, fuAssignUnitField, fuToViewLocation,
 } from './_shared/helpers.js';
 import {
   FuNavUnitBase, type FuNavInitFeeds,
@@ -71,27 +71,16 @@ export class FuNavComponentsRecord <
 
 }
 
-
-type ForEachComponent_callback <
-  ComponentT extends FuAnyComponent,
-  cbArgs extends unknown[] = any[]
-> =
-  (
-    component: ComponentT,
-    args?: cbArgs,
-  )=> void
-;
-
 export type FuComponentinSubDecoratorOptions <
   ComponentT extends FuAnyComponent = FuAnyComponent  // not used yet
 > = {
   'non-mangled-key'?: FuComponentsUnitProps_nonMangledKey, // @TODO
-  parent?: Parameters<typeof fuToViewLocation>[0],
+  parent?: FuViewLocation|FuViewLocation['selectortoQuery'], // initial parent actually
+  isFragment?: boolean, // unused
 }
 
 export function component < // prop decorator, adding parent discovery and non-mangled-key (an edge need for persistence in a rare case of forced mangling object props names)
-  ComponentT extends FuAnyComponent = FuAnyComponent,  // will be useful with the real decorators
-  UnitFieldShape extends FuComponentsUnitProps_Base = FuComponentsUnitProps_Base
+  ComponentT extends FuAnyComponent = FuAnyComponent  // will be useful with the real decorators
 > (
   options?: FuComponentinSubDecoratorOptions<ComponentT>,
   // context?: ClassFieldDecoratorContext,  https://github.com/tc39/proposal-decorators
@@ -102,25 +91,18 @@ export function component < // prop decorator, adding parent discovery and non-m
       // component: ComponentT,
       componentKey: Exclude<_TKeyofRecordT,number>,  // old 'experimental' way, aka propertyKey
     ) {
-      const component = (sub as unknown as Record<string|symbol,FuAnyComponent>)?.[componentKey] as
-        ComponentT & {  // defining as FuAnyComponent<UnitFieldShape> was not possible due to the requirement of order in the typedef
-          [$fu]: UnitFieldShape,  // it actually gracefully presumes that fuAssignUnitField will work
-        }
-      ;
+      const component = (sub as unknown as Record<string|symbol,FuAnyComponent>)?.[componentKey];
       if (_feIsObject(component)) {  // @TOD check also if frozen, etc
 
-        if (!fuIsFragment(component)) {
-          fuAssignUnitField<UnitFieldShape>(component);
-          fuSetPropinUnitField<'getView'>(component,'getView',()=> component);  // is duplicated in sub's constructor
-        }
-        if (fuHasUnitField<UnitFieldShape>(component)) {
+        fuAssignUnitField(component);
+
+        if (fuHasUnitField(component)) {
           component[$fu] = {
-            ...component[$fu],  // fragment has already defined its own, plus the getView is added above
+            ...component[$fu],
             nonMangledKey: options?.['non-mangled-key'] || component[$fu].nonMangledKey, // @TODO consider not adding the field at all
-            computableLocation: options && ('parent' satisfies keyof FuComponentinSubDecoratorOptions) in options
-              ? fuToViewLocation(options?.parent, component[$fu].computableLocation)  // @TODO if fallback here is a good idea
-              : component[$fu].computableLocation,
-            // componentName is set by sub's constructor
+            location: options && ('parent' satisfies keyof FuComponentinSubDecoratorOptions) in options
+              ? fuToViewLocation(options?.parent)
+              : component[$fu].location,
           };
         }
         // return // component as ComponentT;
@@ -139,22 +121,20 @@ export function component < // prop decorator, adding parent discovery and non-m
 }
 
 export function single <
-  ComponentT extends FuSingleTypes_withUnitField = FuSingleTypes_withUnitField, // a sing in subspace gets unit field by design
-  UnitFieldShape extends FuComponentsUnitProps_Base = FuComponentsUnitProps_Base
+  ComponentT extends FuSingleTypes = FuSingleTypes
 > (
   options?: FuComponentinSubDecoratorOptions<ComponentT>,
 ) {
-  return component<ComponentT,UnitFieldShape>(options);
+  return component(options);
 }
 
 export function fragment <
-  ComponentT extends _FuFragmentAny = _FuFragmentAny,
-  UnitFieldShape extends FuComponentsUnitProps_Base = FuComponentsUnitProps_Base
+  ComponentT extends _FuFragmentAny = _FuFragmentAny
 > (
   options?: FuComponentinSubDecoratorOptions<ComponentT>,
 ) {
-  return component<ComponentT,UnitFieldShape>({
-    // isFragment: true,
+  return component({
+    isFragment: true,
     ...options,
   }); // @TODO add prepareFeed if not delayed, or to the constructor instead
 }
@@ -191,10 +171,13 @@ export class FuNavSub <  // FuNavComponentsRecord
       TSub extends FuNavSub<ComponentsRecordLrIdString>,
       cbArgs extends unknown[] = any[]
     > (
-      cb: ForEachComponent_callback<FuAnyComponent,cbArgs>,
+      cb: (
+        component: FuAnyComponent,
+        args?: cbArgs,
+      )=> void,
       ...args: cbArgs
     ) {
-      if (!_feIsFunction(cb)) { // does not check for [$fu] (forEachSingle would)
+      if (!_feIsFunction(cb)) {
         return false;
       }
       const componentsRecord = this.getThis?.() as unknown as FuShapeofComponentsRec<
@@ -214,7 +197,10 @@ export class FuNavSub <  // FuNavComponentsRecord
       TSub extends FuNavSub<ComponentsRecordLrIdString>,
       cbArgs extends unknown[] = any[]
     > (
-      cb: ForEachComponent_callback<_FuFragmentAny,cbArgs>,
+      cb: (
+        component: _FuFragmentAny,
+        args?: cbArgs,
+      )=> void,
       ...args: cbArgs
     ) {
       if (!_feIsFunction(cb)) {
@@ -232,14 +218,17 @@ export class FuNavSub <  // FuNavComponentsRecord
       TSub extends FuNavSub<ComponentsRecordLrIdString>,
       cbArgs extends unknown[] = any[]
     > (
-      cb: ForEachComponent_callback<FuSingleTypes_withUnitField,cbArgs>,
+      cb: (
+        component: FuSingleTypes,
+        args?: cbArgs,
+      )=> void,
       ...args: cbArgs
     ) {
       if (!_feIsFunction(cb)) {
         return;
       }
       const _cb = (component: Parameters<typeof cb>[0], _args: cbArgs)=> {
-        if (!fuIsFragment(component) && fuHasUnitField(component)) {  // stricter than forEachComponent which will not probe for [$fu]
+        if (!fuIsFragment(component)) {
           return cb(component,_args);
         }
       }
@@ -272,27 +261,20 @@ export class FuNavSub <  // FuNavComponentsRecord
       // @ts-ignore @TODO
       Exclude<TSub,_FuNavComponentsRecKeys>
     >);
-    this[$fu].forEachComponent?.(single => {  // not forEachSingle as that will probe for unit field which we assign right here
-      if (fuIsFragment(single)) {
-        return; // nothing to configure, unit field is ok, and we don't add fragment to anchor, fragments add view and feed separately
-      }
-      if (!fuHasUnitField(single)) {
-        // log as it might not be the expected case and result in missing settings, see the single/component decorator
-        fuAssignUnitField(single);  // just in case, and it won't overwrite the existing (due to decorator work may have already been done)
-      }
-      if (fuHasUnitField(single)) {
-        fuSetPropinUnitField<'getView'>(single,'getView',()=> single);  // duplicate of the decorator's work, might belong to the above exception
+    this[$fu].forEachSingle?.(single => {
+      fuAssignUnitField(single);  // just in case, and it won't overwrite the existing (due to decorator work may have already been done)
+      if (!!single[$fu]) {
         for (const [name,_single] of componentsEntries) {
           if (single === _single) {
-            fuSetPropinUnitField<'componentName'>(single,'componentName',name);
+            single[$fu].componentName = name;
             this[$fu].a?.set?.(
               fuComponentIdfromName(name,this[$fu].subspaceId),
-              single  // fragment's are not added as such to the anchor
+              single
             );
           }
         }
       } else {
-        // @TODO if there's no $fu unit field that indicates a broader problem, log
+        // @TODO if there's no $fu field that indicates a broader problem, log
       }
     });
   }
